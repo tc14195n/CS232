@@ -27,19 +27,32 @@ void conditionmixer() {
 	char ch = 'm';
 	
 	printf("3==4 = %d\n", 3==4);
+	// 3==4 = false
 	printf("3==3 = %d\n", 3==3);
+	// 3==3 = true
 	printf("!0 = %d\n", !0);
+	// true?
 	printf("!(-1) = %d\n", !(-1));
+	//
 	printf("!\"abc\" =%d\n", !"abc");
+	//
 	printf("2.0f == 2.0 is %d\n", (2.0f == 2.0));
+	//
 	printf("1.1f == 1.1 is %d\n", (1.1f == 1.1));
+	//
 
         printf("%d\n", ch < 'z' && ch > 'a');
+	//
 	printf("%d\n", !(ch-'z')?1:0);
+	//
 	printf("%d\n", 2 * 3 == 6 || (i = i + 1));
-        printf("%d\n", i);
+        //
+	printf("%d\n", i);
+	//
 	printf("%d\n", 2 * 3 == 6 && (i = i + 1));
-        printf("%d\n", i);
+        //
+	printf("%d\n", i);
+	//
 }
 
 void typemixer() {
@@ -51,8 +64,11 @@ void typemixer() {
 	// The variables were already assigned values.  Let's check them out.
 	// ---------------------------------------------------------------------
 	printf ("i = %d \tj=%d \t\t k=%d\n", i, j, k);		
+	//i = 1		j=10		k=20
 	printf ("a = %c \tB=%c \t\t dollarSign=%c\n", a, B, dollarSign);		
-        printf ("x = %f \ty=%f \t\t z=%e\n", x, y, z);		
+        //a = a		B=B		dollarSign=$
+	printf ("x = %f \ty=%f \t\t z=%e\n", x, y, z);		
+	//x = 2.2	y=0.82352941	z=1.116e-5
 	// ---------------------------------------------------------------------		
 	// And now the fun stuff ....
 	// ---------------------------------------------------------------------
@@ -61,14 +77,17 @@ void typemixer() {
 	// an integer plus a character
 
 	printf("a+j=%d\n", a+j);
+	//a+j=107
 	// ---------------------------------------------------------------------
 	// a character plus an integer
 		
         printf("k+B=%d\n", k+B);
+	//k+B=86
 	// ---------------------------------------------------------------------
 	// mixing floats and characters
 		
 	printf("x/dollarSign = %f\n", x/dollarSign);
+	//x/dollarSign = 0.06111111
 	// ---------------------------------------------------------------------
 	// we can declare new objects at any time!
 		
@@ -79,7 +98,9 @@ void typemixer() {
 	// huh? What's going on here?
 		
 	printf("a+j=%c\n", newChar);
+	//a+j=k
 	printf("B-6=%d\n", B-6);
+	//B-6=60
 
 }
 int main( void )
