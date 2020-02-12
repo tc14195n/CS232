@@ -4,37 +4,51 @@
 // Note, the bits are counted from right to left. 
 // Return the bit states of x within range of [start, end], in which both are inclusive.
 // Assume 0 <= start & end <= 31
-unsigned * get_bits(unsigned x,
-                 unsigned start,
-                 unsigned end) {
-    
-   return NULL;
-    // YOUR CODE HERE
-    // Returning NULL is a placeholder
-    // get_bits dynamically allocates an array a and set a[i] = 1 when (i+start)-th bit
-    // of x is 1, otherwise siet a[i] = 0;
-    // At last, get_bits returns the address of the array.
+
+unsigned * get_bits(unsigned x, unsigned start, unsigned end) {
+	//int * n i = x && (1 << (k-1));
+	//return x[i];
+		//DOESN'T WORK.. LOOK UP HOW TO ACCESS PLACE VALUES OF BINARY
+		//MAYBE I NEED TO CREATE AN ARRAY FROM THE BINARY THEN ACCESS THE ARRAY VALUES  
+	// get_bits dynamically allocates an array a and set a[i] = 1 when (i+start)-th bit
+	// of x is 1, otherwise siet a[i] = 0;
+	// At last, get_bits returns the address of the array. 
+	// YOUR CODE HERE
+	unsigned *p;
+	x = (x & (1 << (start - end)));
+	p = (unsigned*)malloc(x*sizeof(int));
+	//unsigned *p = &x;	
+		
+//unsigned *p = &x;	
+	return p;
 }
+
 
 // Set the bits of x within range of [start, end], in which both are inclusive
 // Assume 0 <= start & end <= 31
-void set_bits(unsigned * x,
-             unsigned start,
-             unsigned end,
-             unsigned *v) {
-    // YOUR CODE HERE
-    // No return value
-    // v points to an array of at least (end-start+1) unsigned integers.
-    // if v[i] == 0, then set (i+start)-th bit of x zero, otherwise, set (i+start)-th bit of x one.
+void set_bits(unsigned * x, unsigned start, unsigned end, unsigned *v) {
+//	x = (x ^ (1 << (1 - start)));
+	// No return value
+	// v points to an array of at least (end-start+1) unsigned integers.
+	// if v[i] == 0, then set (i+start)-th bit of x zero, otherwise, set (i+start)-th bit of x one.
+	//MOST OF THIS LOGIC WILL COME FROM get_bits
+	//NEED TO FLIP VALUE INDICATED BY START/END
+	//IF I NEED TO FLIP A VALUE GREATER THAN THE VALUE OF THE NUMBER, e.g. 101 (flip 4th value), add zeroes inbetween 10101
+	//^^PER ABOVE.. IF BIT DOES NOT EXIST, SET IT TO 1
+	//MAY NOT NEED TO LOOP. ONLY ONE VALUE TO BE FOUND/CHANGED
+
 }
+
 
 // Flip the bits of x within range [start, end], in which both are inclusive.
 // Assume 0 <= start & end <= 31
-void flip_bits(unsigned * x,
-              unsigned start,
-              unsigned end) {
-    // YOUR CODE HERE
-}
+void flip_bits(unsigned * x, unsigned start, unsigned end) {
+	// YOUR CODE HERE
+	//USING ABOVE LOGIC, FIRST CHECK LENGTH
+	//IN ARRAY, FLIP FROM RIGHT TO LEFT 
+	//IF i > size, set to zero
+	//for(int i = start; i <end; ++)
+}	//if(0) 1 else 0
 
 
 /*

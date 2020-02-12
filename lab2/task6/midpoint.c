@@ -17,11 +17,16 @@ int midpoint_C(int x, int y) {
 }
 
 int main(int argc, char ** argv) {
-    int a = atoi(argv[1]); //atoi converts string to int
-    int b = atoi(argv[2]);
-    printf("midpoint_original = %d\n", midpoint_original(a, b));
-    printf("midpoint_A = %d\n", midpoint_A(a, b));
-    printf("midpoint_B = %d\n", midpoint_B(a, b));    
-    printf("midpoint_C = %d\n", midpoint_C(a, b));
+	int a = atoi(argv[1]); //atoi converts string to int
+	int b = atoi(argv[2]);
+	//SEGMENTATION FAULT ON GCC COMPILE??
+	//HOW DO I PASS IN CHARACTER ** argv with max and min
+	//IS ARGC ACTUALLY USED FOR ANYTHING?
+	//HOW DO I BUFFER OVERFLOW ON MAC??
+	printf("points: %d, %d", a,b);
+//    printf("midpoint_original = %d\n", midpoint_original(a, b));
+//    printf("midpoint_A = %d\n", midpoint_A(a, b));
+//    printf("midpoint_B = %d\n", midpoint_B(a, b));    
+//    printf("midpoint_C = %d\n", midpoint_C(a, b));
     return 0;
 }
