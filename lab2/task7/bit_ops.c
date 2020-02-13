@@ -14,37 +14,35 @@ unsigned * get_bits(unsigned x, unsigned start, unsigned end) {
 	// of x is 1, otherwise siet a[i] = 0;
 	// At last, get_bits returns the address of the array. 
 	
-    unsigned int *p_array;
-    p_array = (unsigned int*)malloc((end-start)*sizeof(int));
-	//unsigned int a[end-start] = (unsigned int *)malloc((end-start)*sizeof(int));
-    // = [end-start];	
+    unsigned int *p_arr;
+    p_arr = (unsigned int*)malloc((end-start)*sizeof(int));
 
-	//a = (unsigned int *)malloc((end-start)*sizeof(x));
 	for(int i = 0; i <= end - start; i++){
-		p_array[i] = (( x >> (i+start) & 1));
+		p_arr[i] = (( x >> (i+start) & 1));
 	}
-	//unsigned *p = &a;	
-	//p = &a;
 
-	return p_array;
+
+	return p_arr;
 }
 
 
 // Set the bits of x within range of [start, end], in which both are inclusive
 // Assume 0 <= start & end <= 31
 void set_bits(unsigned * x, unsigned start, unsigned end, unsigned *v) {
-	for(int i = 0; i < end-start; i++){
-	//	x = (x && (1 << (1 - start)));
-		//
-	}
-	// No return value
-	// v points to an array of at least (end-start+1) unsigned integers.
-	// if v[i] == 0, then set (i+start)-th bit of x zero, otherwise, set (i+start)-th bit of x one.
-	//MOST OF THIS LOGIC WILL COME FROM get_bits
-	//NEED TO FLIP VALUE INDICATED BY START/END
-	//IF I NEED TO FLIP A VALUE GREATER THAN THE VALUE OF THE NUMBER, e.g. 101 (flip 4th value), add zeroes inbetween 10101
-	//^^PER ABOVE.. IF BIT DOES NOT EXIST, SET IT TO 1
-	//MAY NOT NEED TO LOOP. ONLY ONE VALUE TO BE FOUND/CHANGED
+    
+
+
+    for(int i = 0; i <= (end-start); i++){
+
+
+        if(v[i]){
+            *x |= 1 << (start + i);
+
+        } else {
+            *x &= ~(1 << (start + i));
+        }
+
+    }
 
 }
 
@@ -52,11 +50,9 @@ void set_bits(unsigned * x, unsigned start, unsigned end, unsigned *v) {
 // Flip the bits of x within range [start, end], in which both are inclusive.
 // Assume 0 <= start & end <= 31
 void flip_bits(unsigned * x, unsigned start, unsigned end) {
-	// YOUR CODE HERE
-	//USING ABOVE LOGIC, FIRST CHECK LENGTH
-	//IN ARRAY, FLIP FROM RIGHT TO LEFT 
-	//IF i > size, set to zero
-	//for(int i = start; i <end; ++)
+	for(int i = 0; i <= (end-start); i++){
+        *x ^= 1 << (start + i);
+    }
 }	//if(0) 1 else 0
 
 
