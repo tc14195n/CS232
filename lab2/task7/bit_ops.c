@@ -13,21 +13,30 @@ unsigned * get_bits(unsigned x, unsigned start, unsigned end) {
 	// get_bits dynamically allocates an array a and set a[i] = 1 when (i+start)-th bit
 	// of x is 1, otherwise siet a[i] = 0;
 	// At last, get_bits returns the address of the array. 
-	// YOUR CODE HERE
-	unsigned *p;
-	x = (x & (1 << (start - end)));
-	p = (unsigned*)malloc(x*sizeof(int));
-	//unsigned *p = &x;	
-		
-//unsigned *p = &x;	
-	return p;
+	
+    unsigned int *p_array;
+    p_array = (unsigned int*)malloc((end-start)*sizeof(int));
+	//unsigned int a[end-start] = (unsigned int *)malloc((end-start)*sizeof(int));
+    // = [end-start];	
+
+	//a = (unsigned int *)malloc((end-start)*sizeof(x));
+	for(int i = 0; i <= end - start; i++){
+		p_array[i] = (( x >> (i+start) & 1));
+	}
+	//unsigned *p = &a;	
+	//p = &a;
+
+	return p_array;
 }
 
 
 // Set the bits of x within range of [start, end], in which both are inclusive
 // Assume 0 <= start & end <= 31
 void set_bits(unsigned * x, unsigned start, unsigned end, unsigned *v) {
-//	x = (x ^ (1 << (1 - start)));
+	for(int i = 0; i < end-start; i++){
+	//	x = (x && (1 << (1 - start)));
+		//
+	}
 	// No return value
 	// v points to an array of at least (end-start+1) unsigned integers.
 	// if v[i] == 0, then set (i+start)-th bit of x zero, otherwise, set (i+start)-th bit of x one.
