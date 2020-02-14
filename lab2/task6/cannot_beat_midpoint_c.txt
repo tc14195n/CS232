@@ -1,0 +1,26 @@
+midpoint_c is much more efficient than both A and B.  While A and B both rely on positive numbers, C works for any positive/negative combination and can much more easily handle large numbers that would choke the other two.  The first half of the equation (x & y) will never result in a number greater the maximum for that exponential value e.g. 111111111 & 111111111 would still only result in a number of the same value.  Midpoint A and B could crash due to numbers going higher due to addition and subtraction operations.  In midpoint_c, the second half of the equation is actually very similar to the (y - x)/2 from midpoint_b, but has a much safer and more efficient operation.  Using the XOR operation, the second half uses bitwise comparison to figure out the difference between the two numbers, then shifting the whole number to the right takes the number down by a power of 2 essentialy cutting it in half.  
+
+Test values:
+points: 200000000, 2000000000
+midpoint_original = -1047483648
+midpoint_A = 1100000000
+midpoint_B = 1100000000
+midpoint_C = 1100000000
+
+points: -200000000, -2000000000
+midpoint_original = 1047483648
+midpoint_A = -1100000000
+midpoint_B = 1047483648
+midpoint_C = -1100000000
+
+points: -90, 10
+midpoint_original = -40
+midpoint_A = -40
+midpoint_B = 2147483608
+midpoint_C = -40
+
+points: 2000000000, -1000000000
+midpoint_original = 500000000
+midpoint_A = -1647483648
+midpoint_B = 500000000
+midpoint_C = 500000000

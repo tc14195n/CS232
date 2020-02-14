@@ -1,0 +1,36 @@
+The initial problem with the original is that two massive numbers combined could overflow the buffer.
+Midpoint_A seeks to avoid this by "shrinking"
+Midpoint_A will fail is x is a large positive number and y is a large negative number.  The second half of the equation which
+	tries to create a smaller number would actually just end up adding two very large negative numbers.
+
+Midpoint_B creates an "absolute value" version of the midpoint calculation by forcing the x,y values into unsigned integers.
+	In theory, it would reduce the overhead since the negative bit has been dropped.  However, this method will always return a 
+	positive midpoint value of the positive versions of both numbers.  e.g. -90 and 10 as x,y should have a midpoint of -40, however, 
+	method b turns the values into (90 + 10)/2 which would be positive 50.  The correct, negative midpoint would never be returned.
+
+Test values:
+points: 200000000, 2000000000
+midpoint_original = -1047483648
+midpoint_A = 1100000000
+midpoint_B = 1100000000
+midpoint_C = 1100000000
+
+points: -200000000, -2000000000
+midpoint_original = 1047483648
+midpoint_A = -1100000000
+midpoint_B = 1047483648
+midpoint_C = -1100000000
+
+points: -90, 10
+midpoint_original = -40
+midpoint_A = -40
+midpoint_B = 2147483608
+midpoint_C = -40
+
+points: 2000000000, -1000000000
+midpoint_original = 500000000
+midpoint_A = -1647483648
+midpoint_B = 500000000
+midpoint_C = 500000000
+
+After running the tests, I correctly identified failure scenario for A and B, but did not correctly foretell the actual results for them.  
