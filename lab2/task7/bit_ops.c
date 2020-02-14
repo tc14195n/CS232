@@ -6,14 +6,7 @@
 // Assume 0 <= start & end <= 31
 
 unsigned * get_bits(unsigned x, unsigned start, unsigned end) {
-	//int * n i = x && (1 << (k-1));
-	//return x[i];
-		//DOESN'T WORK.. LOOK UP HOW TO ACCESS PLACE VALUES OF BINARY
-		//MAYBE I NEED TO CREATE AN ARRAY FROM THE BINARY THEN ACCESS THE ARRAY VALUES  
-	// get_bits dynamically allocates an array a and set a[i] = 1 when (i+start)-th bit
-	// of x is 1, otherwise siet a[i] = 0;
-	// At last, get_bits returns the address of the array. 
-	
+
     unsigned int *p_arr;
     p_arr = (unsigned int*)malloc((end-start)*sizeof(int));
 

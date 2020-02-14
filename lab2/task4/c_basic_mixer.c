@@ -33,26 +33,26 @@ void conditionmixer() {
 	printf("!0 = %d\n", !0);
 	// true?
 	printf("!(-1) = %d\n", !(-1));
-	//
+	//!(-1)=1
 	printf("!\"abc\" =%d\n", !"abc");
-	//
+	//!abc =-abc
 	printf("2.0f == 2.0 is %d\n", (2.0f == 2.0));
-	//
+	//2.0f == 2.0 is 1
 	printf("1.1f == 1.1 is %d\n", (1.1f == 1.1));
-	//
+	//1.1f == 1.1 is 0
 
         printf("%d\n", ch < 'z' && ch > 'a');
-	//
+	//1
 	printf("%d\n", !(ch-'z')?1:0);
-	//
+	//0
 	printf("%d\n", 2 * 3 == 6 || (i = i + 1));
-        //
+        //1
 	printf("%d\n", i);
-	//
+	//6
 	printf("%d\n", 2 * 3 == 6 && (i = i + 1));
-        //
+        //1
 	printf("%d\n", i);
-	//
+	//7
 }
 
 void typemixer() {

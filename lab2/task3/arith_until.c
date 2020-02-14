@@ -9,7 +9,7 @@ int main()
 	printf("Enter radius (in mm):\n");
 	scanf("%f", &r);
   
-  	while(r != 0){
+  	while(r != 0 && r != -1){
   		if(r == 0){
 			break;
 	 	} else {
