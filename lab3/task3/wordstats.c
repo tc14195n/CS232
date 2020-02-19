@@ -10,6 +10,15 @@ int main () {
   char buf[MAX_BUF];
 
   do {
+    fgets(buf,MAX_BUF,stdin);
+    len = strlen(buf);
+    for(int i = 0; i < len; i++){
+      if(buf[i] > 64 && buf[i] < 91){
+        letter_frequency[buf[i] - 65]++;
+      } else if (buf[i] > 96 && buf[i] < 123){
+        letter_frequency[buf[i] - 97]++;
+      }
+    }
   } while (len > 1);
 
   printf("Distribution of letters in corpus:\n");
