@@ -56,10 +56,17 @@ int main(void)
 
 	int n = 7;
 	printf("main : m=%d, n=%d\n", m, n);
+	//"main : m=1, n=7"
 	U(n);
+	//"U : m=7, n=7"
 	printf("main : m=%d, n=%d\n", m, n);
+	//"main : m=1 , n=7 "
 	A();
+	//"global: m=5"
+	//"A: m=3"
 	printf("main : m=%d, n=%d\n\n\n", m, n);
+	//"main : m=5, n=7"
+
 
 	// -------------------------------------------------
 	// Below is a block, which may declare its own local
@@ -73,8 +80,11 @@ int main(void)
 		int n = 100;
 
 		printf("block : m=%d, n=%d\n", m, n);
+		//"block : m=5, n=100"
 		U(n);
+		//" U: m=100, n=100"
 		printf("block : m=%d, n=%d\n", m, n);
+		//block: m=5, n=100"
 		// -------------------------------------------------
 		// A local variable m is now declared.
 		// References to m from here to the end of the
@@ -83,14 +93,20 @@ int main(void)
 		int m = -40;
 
 		printf("block : m=%d, n=%d\n", m, n);
+		//"block : m=-40, n=100"
 		val(m);
+		//"val : x=-40"
 		printf("block : m=%d\n", m);
+		//"block : m=-40"
 		addr(&m);
+		//ref : *x=-40"
 		printf("block : m=%d\n", m);
+		//"block : m=5"
 
 	}
 
 	printf("main : m=%d, n=%d\n\n\n", m, n);
+	//"main : m=5, n=7"
 	//
 	// ---------------------------------------------------------------------
 	return 0;
