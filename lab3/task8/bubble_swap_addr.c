@@ -3,7 +3,8 @@
 #include <stdio.h>  /* Need for standard I/O functions */
 #include <string.h> /* Need for strlen() */
 
-#define NUM 30   /* number of strings */
+//#define NUM 30   /* number of strings */
+#define NUM 5
 
 #define LEN 1200  /* max length of each string */
 
