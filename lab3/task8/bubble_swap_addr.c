@@ -2,50 +2,40 @@
 
 #include <stdio.h>  /* Need for standard I/O functions */
 #include <string.h> /* Need for strlen() */
+#include <stdlib.h>
 
 //#define NUM 30   /* number of strings */
 #define NUM 5
 
-#define LEN 1200  /* max length of each string */
+//#define LEN 1200  /* max length of each string */
 
-void swap(char a[], char b[]){
-
-  char temp_str[strlen(a)];
-
-  for(int i = 0; i < strlen(a); i++){
-    temp_str[i] = a[i];
-  }
-
-  for(int i = 0; i <= strlen(b); i++){
-
-    if(i == strlen(b)){
-      a[i] = '\0';
-    } else {
-      a[i] = b[i];     
-    }
-  }
-  for(int i = 0; i <= strlen(temp_str); i++){
-    if(i == strlen(temp_str)){
-      b[i] = '\0';
-    } else {
-      b[i] = temp_str[i];
-    } 
-  }
+void swap(char **a, char **b){
+  char* a_addr = *a;
+  *a = *b;
+  *b = a_addr;
 }
 
 int main()
 {
-  char Strings[NUM][LEN];
+  char *Strings[NUM];
 
-  for(int k = 0; k < NUM; k++){     
-    fgets(Strings[k],LEN,stdin);
+  for(int k = 0; k < NUM; k++){
+    char c;
+    int str_size = 0;
+    Strings[k] = (char*)malloc(sizeof(char));
+     c = getchar();
+    while(c != '\n'){
+      char *a = (char *)realloc(Strings[k],(sizeof(char)*(str_size+1)));
+      Strings[k] = a;
+      Strings[k][str_size] = c;
+      str_size++;
+      c = getchar();
+    } 
   }
 
   puts("\nHere are the strings in the order you entered:");
   for(int i = 0; i < NUM; i++){
-    for(int l = 0; l < strlen(Strings[i]); l++){
-      printf("%c",Strings[i][l]);
-    }
+    printf("%s\n",Strings[i]);
   }
 
   int sorted = 0;
@@ -57,7 +47,7 @@ int main()
         if(Strings[i][j] < Strings[i+1][j]){
           break;
         } else if(Strings[i][j] > Strings[i+1][j]){
-          swap(Strings[i],Strings[i+1]);
+          swap(&Strings[i],&Strings[i+1]);
           sorted = 0;
           break;
         }
@@ -67,8 +57,7 @@ int main()
   
   puts("\nIn alphabetical order, the strings are:");     
   for(int i = 0; i < NUM; i++){
-
-    printf("%s",Strings[i]);
+    printf("%s\n",Strings[i]);
   }
 
 
