@@ -4,8 +4,7 @@
 #include <string.h> /* Need for strlen() */
 #include <stdlib.h>
 
-//#define NUM 30   /* number of strings */
-#define NUM 5
+#define NUM 30   /* number of strings */
 
 //#define LEN 1200  /* max length of each string */
 
