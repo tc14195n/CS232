@@ -57,6 +57,7 @@ int main()
   puts("\nIn alphabetical order, the strings are:");     
   for(int i = 0; i < NUM; i++){
     printf("%s\n",Strings[i]);
+    free(Strings[i]);
   }
 
 

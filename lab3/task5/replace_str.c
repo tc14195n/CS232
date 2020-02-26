@@ -12,7 +12,7 @@ void CS232(char* src) {
      char *srcptr, *replaceptr; 
      // char *srcptr, *replaceptr;
      int srcLength = sizeof(*src);
-     printf("srcLength: %s",src);
+     printf("srcLength: %d",(int)sizeof(src));
      char replacement[15] = "232 is awesome!";
      srcptr = src;
      replaceptr = replacement;
@@ -23,8 +23,8 @@ void CS232(char* src) {
 }
 
 char * replace_string() {
-    //char str[15];
-    char* str = (char*)calloc(15,sizeof(char));
+    char str[15];
+    //char* str = (char*)calloc(15,sizeof(char));
     CS232(str);
     return str;
 
