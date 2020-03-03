@@ -42,8 +42,12 @@ int main(void) {
     trace_structs_pointers();
     printf("---------------------------------------------\n");	
     strlen_vs_sizeof();
+    //strlen(str):6 sizeof(str):7 sizeof(str2):8 sizeof(s):8, sizeof(*s):1
     printf("---------------------------------------------\n");	
     pointer_math();
+    //a[3]:3 str[3]:l
+    //a=(address of a[0]) a+3=(address of a[3]) (a+3-a)= a and (-a) cancel out and result in just 3
+    //str=address of str[0] str+3=address of str[3] (str+3-str)= str and (-str) cancel out and result in just 3
     printf("---------------------------------------------\n");	
     pointer_casting();
     printf("---------------------------------------------\n");	
@@ -73,6 +77,7 @@ void strlen_vs_sizeof() {
     char str2[8]="Hello!";
     char * s = str;
 
+    //strlen(str):6 sizeof(str):7 sizeof(str2):8 sizeof(s):8, sizeof(*s):1
     printf("strlen(str):%d sizeof(str):%d sizeof(str2):%d sizeof(s):%d, sizeof(*s):%d\n",
          (int) strlen(str),  //the length of the str
          (int) sizeof(str),  //the memory size of the str
@@ -98,10 +103,17 @@ void pointer_math() {
     char str[] = "Hello!";
     //pointer arithmetic consideration of typing
     printf("a[3]:%d str[3]:%c\n", *(a+3),*(str+3));
+    //a[3]:3 str[3]:l
     // I know you would not know what the actual addresses are, just comment
     // what you think (a+3-a) and (str+3-str) are.
     printf("a=%p a+3=%p (a+3-a)=%ld\n",a,a+3, ((long) (a+3)) - (long) a);
+    //a=(address of a[0]) a+3=(address of a[3]) (a+3-a)= a and (-a) cancel out and result in just 3
     printf("str=%p str+3=%p (str+3-str)=%ld\n",str,str+3, ((long) (str+3)) - (long) str);
+    //str=address of str[0] str+3=address of str[3] (str+3-str)= str and (-str) cancel out and result in just 3
+
+    //a[3]:3 str[3]:l
+    //a=(address of a[0]) a+3=(address of a[3]) (a+3-a)= a and (-a) cancel out and result in just 3
+    //str=address of str[0] str+3=address of str[3] (str+3-str)= str and (-str) cancel out and result in just 3
 }
 // ----------------------------------------------------------------------------
 
@@ -116,6 +128,7 @@ void pointer_casting() {
 
     int * i = (int *) s;  //cast s to an integer pointer
     printf("*i = %d\n", *i); 
+    //*i = 
     //use characters as a generic container for data and then used pointer casting 
     //to determine how to interpret that data. char array is an arbitrary container
     //that stores a bunch of bytes.

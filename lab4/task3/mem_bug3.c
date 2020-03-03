@@ -2,7 +2,8 @@
 #include <stdlib.h>
 int * makearray(int size,int base){
 
-  int array[size];
+  int *array = (int*)malloc(size*sizeof(int));
+  //int array[size];
   int j;
 
   for(j=0;j<size;j++)
@@ -29,4 +30,6 @@ int main(){
   printf("\n");
 
   printf("SUM: %d\n", sum);
+  free(a1);
+  free(a2);
 }
