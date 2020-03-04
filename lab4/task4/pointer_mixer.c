@@ -38,8 +38,15 @@ void readonly_vs_stack();
 int main(void) {
     printf("---------------------------------------------\n");	
     trace_pointers();
+    //42 42
+    //7 42
+    //8 7 8 8
+    //123 8 7 123 123
     printf("---------------------------------------------\n");	
     trace_structs_pointers();
+    //a=0 b=1
+    //a=2 b=1
+    //a=4 b=5
     printf("---------------------------------------------\n");	
     strlen_vs_sizeof();
     //strlen(str):6 sizeof(str):7 sizeof(str2):8 sizeof(s):8, sizeof(*s):1
@@ -50,16 +57,31 @@ int main(void) {
     //str=address of str[0] str+3=address of str[3] (str+3-str)= str and (-str) cancel out and result in just 3
     printf("---------------------------------------------\n");	
     pointer_casting();
+    //*i = 2147483647 
     printf("---------------------------------------------\n");	
     byte_ordering();
+    //02xdaedbeef
     printf("---------------------------------------------\n");	
     simple_double_array();
     printf("---------------------------------------------\n");	
     string_double_array_pointer_array();
+    //str1: This is a locust tree
+    //str2: This is also a locust tree
+    //strings: Go Pace!Beat CUNY!Crash SUNY!Enjoy CS232!
+    //strings[0]: 'Go Pace!' 0
+    //strings[1]: 'Go Pace!' 9
+    //strings[2]: 'Go Pace!' 19
+    //strings[3]: 'Go Pace!' 30
     printf("---------------------------------------------\n");	
     string_equal();
+    //s1: "Pace" == s2: Pace?
+    //s3: Pace == s4: Pace?
     printf("---------------------------------------------\n");	
     readonly_vs_stack();
+    //str1: this is a locust tree
+    //str2: this is also a locust tree
+    
+
 }
 
 // ----------------------------------------------------------------------------
@@ -128,7 +150,7 @@ void pointer_casting() {
 
     int * i = (int *) s;  //cast s to an integer pointer
     printf("*i = %d\n", *i); 
-    //*i = 
+    //*i = 2147483647 
     //use characters as a generic container for data and then used pointer casting 
     //to determine how to interpret that data. char array is an arbitrary container
     //that stores a bunch of bytes.
@@ -195,6 +217,8 @@ void string_double_array_pointer_array() {
     char * str2 = "This is also a locust tree"; //str2 is a pointer to char
 
     printf("str1:%p\n",str1);
+    //str1: This is a locust tree
+    //str2: This is also a locust tree
     printf("str2:%p\n",str2); //which is at the higer address? why?
                               //check the memory layout of your process 
                               //what lays at the bottom?
@@ -206,10 +230,17 @@ void string_double_array_pointer_array() {
     int i;
 
     printf("strings: %p\n",strings); //higher address or lower address? why?
+    //strings: Go Pace!Beat CUNY!Crash SUNY!Enjoy CS232!
     for(i=0;i<4;i++){
       printf("strings[%d]: '%s' %p\n",i,strings[i],strings[i]);
       //are they in higher address or lower address? why?
   }
+  //strings[0]: 'Go Pace!' 0
+  //strings[1]: 'Go Pace!' 9
+  //strings[2]: 'Go Pace!' 19
+  //strings[3]: 'Go Pace!' 30
+  
+
 }
 // ----------------------------------------------------------------------------
 //a common mistake for Java programmers to manipulate C strings:
@@ -220,6 +251,7 @@ void string_equal() {
     char * s4 = "Pace";
     if(s1 == s2){
         printf("Go Pace!\n");
+        //Go Pace!
     }else if(s3 == s4) {
         printf("Beat CUNY!\n");
     }else {
@@ -228,6 +260,8 @@ void string_equal() {
     printf("\n");
     printf("s1: %p == s2: %p? \n", s1, s2);
     printf("s3: %p == s4: %p? \n", s3, s4);
+    //s1: "Pace" == s2: Pace?
+    //s3: Pace == s4: Pace?
 }
 //Now do you understand why we need string lib, like strcmp?
 // ----------------------------------------------------------------------------
@@ -239,17 +273,21 @@ void trace_pointers() {
     int *t = &a;
     int *u = NULL;
     printf("%d %d\n", a, *t);
+    //42 42
 
     c = b;
     u = t;
     printf("%d %d\n", c, *u);
+    //7 42
 
     a = 8;
     b = 8;
     printf("%d %d %d %d\n", b, c, *t, *u);
+    //8 7 8 8
 
     *t = 123;
     printf("%d %d %d %d %d\n", a, b, c, *t, *u);
+    //123 8 7 123 123
 }
 
 // ----------------------------------------------------------------------------
@@ -279,12 +317,15 @@ void trace_structs_pointers()
     my_stuff.a = &temp;
     my_stuff.b = 1;
     printf("a=%d b=%d\n", *(my_stuff.a), my_stuff.b);
+    //a=0 b=1
 
     foo(my_stuff);
     printf("a=%d b=%d\n", *(my_stuff.a), my_stuff.b);
+    //a=2 b=1
 
     bar(&my_stuff);
     printf("a=%d b=%d\n", *(my_stuff.a), my_stuff.b);
+    //a=4 b=5
 }
 
 // ----------------------------------------------------------------------------
@@ -294,7 +335,9 @@ void readonly_vs_stack() {
 
   str1[0] = 't';
   printf("str1: %s \n",str1);
+  //str1: this is a locust tree
   str2[0] = 't';
   printf("str2: %s \n",str2);
+  //str2: this is also a locust tree
 }
 

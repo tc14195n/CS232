@@ -40,9 +40,10 @@ int dump_all(node_t * x) {
     	printf("failed");
 	return -1;
     } else {
+        free(x);
+        free(y);
+        free(z);
         return 0;
     }
-    free(x);
-    free(y);
-    free(z);
+    
 }
