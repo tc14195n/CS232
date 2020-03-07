@@ -1,10 +1,28 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<string.h>
 #include "snode.h"
 typedef struct snode node_t;
 
 node_t * setup() {
     node_t * head ;
+    node_t *y,*z;
+
+    head=(node_t *)malloc(sizeof(node_t));
+    y=(node_t *)malloc(sizeof(node_t));
+    z=(node_t *)malloc(sizeof(node_t));
+
+    strcpy(head->str,"hello");
+    head->length = 5;
+    head->next = y;
+
+    strcpy(y->str,"there");
+    y->length = 5;
+    y->next = z;
+
+    strcpy(z->str, "prof");
+    z->length = 4;
+    z->next = NULL;
     //TODO:head declared for you
     //Allocate three more pointers
     //head for the first Node, and temporary pointers node1, node2 and node3
@@ -16,7 +34,16 @@ node_t * setup() {
    return head;
 }
 
-void teardown(/*what parameter?*/) {
+void teardown(node_t* head) {
+	node_t* cur = head;
+	node_t* next = cur->next;
+	free(cur);
+	cur = next;
+	next = cur->next;
+	free(cur);
+	cur = next;
+	free(cur);
+
     //TODO: free all dynamic memory you requested.
     //Please complete the prototype of teardown.
     //You are not allowed to use globals
@@ -27,7 +54,7 @@ void dump_all(node_t*);
 int main (int argc, char ** argv) {
     node_t * head = setup();
     dump_all(head);
-    teardown(/*what argument?*/);
+    teardown(head);
     return 0;
 }
 
