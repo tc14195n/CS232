@@ -37,12 +37,18 @@ node_t * setup() {
 void teardown(node_t* head) {
 	node_t* cur = head;
 	node_t* next = cur->next;
+	while(next != NULL){
+		free(cur);
+		cur = next;
+		next = cur->next;
+	}
 	free(cur);
+	/*free(cur);
 	cur = next;
 	next = cur->next;
 	free(cur);
 	cur = next;
-	free(cur);
+	free(cur);*/
 
     //TODO: free all dynamic memory you requested.
     //Please complete the prototype of teardown.
