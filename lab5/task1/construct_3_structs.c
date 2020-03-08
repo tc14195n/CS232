@@ -43,16 +43,6 @@ void teardown(node_t* head) {
 		next = cur->next;
 	}
 	free(cur);
-	/*free(cur);
-	cur = next;
-	next = cur->next;
-	free(cur);
-	cur = next;
-	free(cur);*/
-
-    //TODO: free all dynamic memory you requested.
-    //Please complete the prototype of teardown.
-    //You are not allowed to use globals
 }
 
 //You can ignore the following code for testing
