@@ -40,10 +40,26 @@ node_t * setup() {
 
 }
 
-void teardown(/*what parameter?*/) {
+void teardown(node_t* head) {
     //TODO: free all dynamic memory you requested.
     //Please complete the prototype of teardown.
     //You are not allowed to use globals
+
+	node_t* cur = head;
+	node_t* next = cur->next;
+	while(next != NULL){
+		free(cur);
+		cur = next;
+		next = cur->next;
+	}
+	free(cur);
+	/*free(cur);
+	cur = next;
+	next = cur->next;
+	free(cur);
+	cur = next;
+	free(cur);*/
+
 }
 
 void add(node_t ** head, char * str, int length){
