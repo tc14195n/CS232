@@ -4,6 +4,7 @@
 typedef struct snode node_t;
 
 node_t * setup() {
+
     node_t * head ;
     node_t *y,*z;
 
@@ -45,14 +46,73 @@ void add(node_t ** head, char * str, int length){
     strcpy(temp->str, str);
     temp->next = *head;
     *head = temp;
+
 }
 void delete_node_at(node_t ** head, int idx) {
     //TODO: implement delete a node based on index
 	//deletes a node at index idx, which ranges from zero to the length of the list - 1.
+
+	if(*head == NULL)
+	{
+		return;
+	}
+
+	node_t *temp = NULL;
+	temp = *head;
+
+	if(idx == 0)
+	{
+	*head = temp->next;
+	free(temp);
+	return;
+	}
+
+	for(int i=0; temp!=NULL && i<idx-1; i++)
+	{
+		temp = temp->next;
+	}
+
+	if(temp == NULL || temp->next == NULL)
+	{
+		return;
+	}
+	
+	node_t *next = temp->next->next;
+	free(temp->next);
+	temp->next = next;
+		
 } 
 void delete_node_key(node_t **head, char * key) {
     //TODO: implement delete a node based on key
 	//given a certain key, find and delete. 
+
+
+	node_t *temp = *head, *prev;
+	
+	while(temp != NULL && temp->str == key)
+	{
+		*head = temp->next;
+		free(temp);
+		temp = *head;
+	}
+
+	while(temp != NULL)
+	{
+		while(temp != NULL && temp->str != key)
+		{
+			prev = temp;
+			temp = temp->next;
+		}
+
+		if(temp == NULL)
+		{
+			return;
+		}
+
+		prev->next = temp->next;
+		free(temp);
+		temp = prev->next;
+	}
 }
 //You can ignore the following code for testing
 void dump_all(node_t*);
