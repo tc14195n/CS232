@@ -79,7 +79,7 @@ int main (int argc, char ** argv) {
     node_t * head = setup();
     add(&head, "hi", 2);
     dump_all(head);
-    teardown(/*what argument?*/);
+    teardown(head);
 	free(head);
     return 0;
 }
