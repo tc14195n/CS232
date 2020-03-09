@@ -38,7 +38,6 @@ void teardown(node_t* head) {
 }
 
 void add(node_t ** head, char * str, int length){
-    //TODO: implement add to add a new node to front, pointed by head
 
     node_t *temp = NULL;
     temp = (node_t *)malloc(sizeof(node_t));
@@ -49,9 +48,6 @@ void add(node_t ** head, char * str, int length){
 
 }
 void delete_node_at(node_t ** head, int idx) {
-    //TODO: implement delete a node based on index
-	//deletes a node at index idx, which ranges from zero to the length of the list - 1.
-
 	if(*head == NULL)
 	{
 		return;
@@ -62,12 +58,13 @@ void delete_node_at(node_t ** head, int idx) {
 
 	if(idx == 0)
 	{
-	*head = temp->next;
-	free(temp);
-	return;
+		*head = temp->next;
+		free(temp);
+		return;
 	}
 
-	for(int i=0; temp!=NULL && i<idx-1; i++)
+	//for(int i=0; temp!=NULL && i<idx-1; i++)
+	for(int i=0; temp!=NULL && i<idx; i++)
 	{
 		temp = temp->next;
 	}
@@ -83,35 +80,20 @@ void delete_node_at(node_t ** head, int idx) {
 		
 } 
 void delete_node_key(node_t **head, char * key) {
-    //TODO: implement delete a node based on key
-	//given a certain key, find and delete. 
-
-
 	node_t *temp = *head, *prev;
-	
-	while(temp != NULL && temp->str == key)
+
+	while(temp != NULL && strcmp(temp->str,key) != 0)
 	{
-		*head = temp->next;
-		free(temp);
-		temp = *head;
+		prev = temp;
+		temp = temp->next;
 	}
-
-	while(temp != NULL)
+	if(temp == NULL)
 	{
-		while(temp != NULL && temp->str != key)
-		{
-			prev = temp;
-			temp = temp->next;
-		}
-
-		if(temp == NULL)
-		{
-			return;
-		}
-
+		return;
+	} else {
 		prev->next = temp->next;
 		free(temp);
-		temp = prev->next;
+		//temp = prev->next;
 	}
 }
 //You can ignore the following code for testing
