@@ -10,6 +10,8 @@ int main(void)   {
 
     song_list = slist_create();
 
+
+
     slist_add_back(song_list, "Thinking Out Loud");
     slist_add_back(song_list, "See You Again");
     slist_add_back(song_list, "Trap Queen");
