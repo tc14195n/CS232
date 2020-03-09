@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "snode.h"
+#include "slist.h"
 #include <string.h>
 #include <stdlib.h>
 
