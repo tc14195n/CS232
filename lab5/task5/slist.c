@@ -24,7 +24,7 @@ struct slist *slist_create(){
 };
 
 
-struct snode* slist_add_back(struct slist *l, char *str){
+struct snode* slist_add_back(struct slist *l, void *str){
 	/** 
  	* Inserts new node in slist after the last node.
  	*
@@ -47,7 +47,7 @@ struct snode* slist_add_back(struct slist *l, char *str){
 };
 
 
-struct snode* slist_add_front(struct slist *l, char *str){
+struct snode* slist_add_front(struct slist *l, void *str){
 	/** 
  	* Inserts new node in slist before the first node.
  	*
@@ -69,7 +69,7 @@ struct snode* slist_add_front(struct slist *l, char *str){
 };
 
 
-struct snode* slist_find(struct slist *l, char *str)
+struct snode* slist_find(struct slist *l, void *str)
 {
 	/**
  	* Returns the first snode with the given string.
@@ -81,7 +81,7 @@ struct snode* slist_find(struct slist *l, char *str)
 	struct snode *temp;
 	temp = l->front;
 	while(temp != NULL){
-		if(strcmp(temp->str,str) == 0){
+		if(strcmp(temp->data,str) == 0){
 			return temp;
 		} else {
 			temp = temp->next;
@@ -127,7 +127,7 @@ void slist_traverse(struct slist *l)
 	temp = l->front;
 	
 	while(temp != NULL){
-		printf("%s\n",temp->str);
+		printf("%s\n",(char*)temp->data);
 		temp = temp->next;
 	}
 };
@@ -152,7 +152,7 @@ uint32_t slist_length(struct slist *l)
 };
 
 //struct snode* slist_delete(struct slist *l, char *str){
-struct snode* slist_delete(struct slist *l, char *str)
+struct snode* slist_delete(struct slist *l, void *str)
 {
 
 	/**
@@ -167,7 +167,7 @@ struct snode* slist_delete(struct slist *l, char *str)
  	//if deleting last ndoe, redefine "l->back"
 	struct snode *tbd = l->front, *last = NULL;
 	while(tbd != NULL){
-		if(strcmp(tbd->str,str) == 0){
+		if(strcmp(tbd->data,str) == 0){
 			//delete
 			if(last == NULL){
 				l->front = tbd->next;

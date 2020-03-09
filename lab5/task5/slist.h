@@ -55,7 +55,7 @@ struct slist *slist_create();
  * @param str pointer to a C string to store in new list node
  * returns a pointer to the newly added node
  */
-struct snode* slist_add_back(struct slist *l, char *str);
+struct snode* slist_add_back(struct slist *l, void *str);
 
 /** 
  * Inserts new node in slist before the first node.
@@ -64,7 +64,7 @@ struct snode* slist_add_back(struct slist *l, char *str);
  * @param str pointer to a C string to store in new list node
  * returns a pointer to the newly added node
  */
-struct snode* slist_add_front(struct slist *l, char *str);
+struct snode* slist_add_front(struct slist *l, void *str);
 
 /**
  * Returns the first snode with the given string.
@@ -73,7 +73,7 @@ struct snode* slist_add_front(struct slist *l, char *str);
  * @parap str pointer to a string
  * @return struct snode* or NULL if no match
  */
-struct snode* slist_find(struct slist *l, char *str);
+struct snode* slist_find(struct slist *l, void *str);
 
 /**
  * Deallocate a list and all snodes
@@ -102,7 +102,7 @@ uint32_t slist_length(struct slist *l);
  * @parap str pointer to a string
  * @return struct snode* or NULL if no match
  */
-struct snode* slist_delete(struct slist *l, char *str);
+struct snode* slist_delete(struct slist *l, void *str);
 
 
 #endif /* _slist_H_ */
