@@ -175,9 +175,11 @@ struct snode* slist_delete(struct slist *l, void *str)
 				return NULL;
 			} else if(tbd->next == NULL){
 				l->back = last;
+				return NULL;
 			} else {
 				last->next = tbd->next;
 				snode_destroy(tbd);
+				return NULL;
 			}
 		}
 		last = tbd;
