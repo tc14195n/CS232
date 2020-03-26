@@ -14,6 +14,8 @@ struct snode {
 //TODO: change prototypes of functions to remove
 //length
 struct snode *snode_create(char *s) ; 
+char* snode_get_str(struct snode *s);
+struct snode *snode_get_next(struct snode *s);
 void snode_destroy(struct snode * s) ;
  
 #endif

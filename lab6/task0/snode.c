@@ -18,6 +18,12 @@ struct snode *snode_create(char *s)
 
   
 }
+char* snode_get_str(struct snode *s){
+	return s->str;
+}
+struct snode *snode_get_next(struct snode *s){
+	return s->next;
+}
 void snode_destroy(struct snode * s) 
 {
 	free(s->str);

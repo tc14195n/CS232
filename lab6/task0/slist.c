@@ -170,11 +170,15 @@ struct snode* slist_delete(struct slist *l, char *str)
 		if(strcmp(tbd->str,str) == 0){
 			//delete
 			if(last == NULL){
+				if(slist_length(l) == 1){
+					l->back = NULL;
+				}
 				l->front = tbd->next;
 				snode_destroy(tbd);
 				return NULL;
 			} else if(tbd->next == NULL){
 				l->back = last;
+				//snode_destroy(tbd);
 				return NULL;
 			} else {
 				last->next = tbd->next;
