@@ -52,11 +52,6 @@ struct slist *slist_create();
 struct snode * slist_get_front(struct slist *a);
 struct snode * slist_get_back(struct slist *a);
 
-struct list_t {
-  struct snode *front; // front node
-  struct snode *back;  // back node
-  int size;
-};
 
 //struct list_t *slist_create();
 //struct snode * slist_get_front(struct list_t *list);

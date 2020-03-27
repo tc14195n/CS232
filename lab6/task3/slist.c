@@ -157,16 +157,23 @@ void slist_destroy(struct slist *l)
  	*
  	* @param l pointer tot he list
  	*/
-	struct snode *tbd, *next; //tbd -- snode TO BE DESTROYED
+	struct snode * tbd, *next; //tbd -- snode TO BE DESTROYED
 	tbd = l->front;
-	next = tbd->next;
+	next = NULL;
+	if(tbd != NULL){
+		next = tbd->next;
+	}
+	
 
 	while(next != NULL){
 		snode_destroy(tbd);
 		tbd = next;
 		next = tbd->next;
 	}
-	snode_destroy(tbd);
+	if(tbd != NULL){
+		snode_destroy(tbd);
+	}
+	
 	free(l);
 
 };
@@ -266,7 +273,8 @@ void slist_delete_at(struct slist *list, int index)
 	//snode_destroy(temp);
 	//free(list);
 
-	struct snode *temp;
+	struct snode *temp, *last;
+	last = NULL;
 	//snode *last;
 	temp = list->front;
 	int num = 0;
@@ -278,34 +286,45 @@ void slist_delete_at(struct slist *list, int index)
 		return;
 		}
         num = length + index;
-	} else
+	} else 
 	{
         if(index > length)
-	{
+        {
             return;
         }
         num = index;
-}
+	}
     //int num1 = 0;
 	for(int i = 0; i < num; i++)
 	{
-	//last = temp;
+		last = temp;
         temp = temp->next;
 	}
 
-        list->size--;
-        if(temp->next == NULL)
+    list->size--;
+    if(temp->next == NULL)
 	{
             //l->back = last;
-            //last->next = NULL;
-            snode_destroy(temp);
-        }
+		if(num != 0){
+			last->next = NULL;
+		} else {
+			list->front = NULL;
+			list->back = NULL;
+		}
+
+        snode_destroy(temp);
+        return;
+    }
 	else
 	{
-            //last->next = temp->next;
-            snode_destroy(temp);
-            return;
-        }
+		if(num != 0){
+			last->next = temp->next;
+		} else {
+			list->front = temp->next;
+		}
+        snode_destroy(temp);
+        return;
+    }
 }
 
 struct snode * slist_get_front(struct slist *a)
