@@ -259,6 +259,7 @@ struct snode* slist_delete(struct slist *l, char *str)
 
 };
 
+<<<<<<< HEAD
 void slist_delete_at(struct slist *list, int index)
 {
 	//struct snode * temp;
@@ -308,6 +309,8 @@ void slist_delete_at(struct slist *list, int index)
         }
 }
 
+=======
+>>>>>>> d3246c1026f538bfc1caf6e3b22d63d5f39e57d4
 struct snode * slist_get_front(struct slist *a)
 {
 	struct snode *temp;

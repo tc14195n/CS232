@@ -122,7 +122,10 @@ uint32_t slist_length(struct slist *l);
  * @return struct snode* or NULL if no match
  */
 struct snode* slist_delete(struct slist *l, char *str);
+<<<<<<< HEAD
 void slist_delete_at(struct slist *list, int index);
+=======
+>>>>>>> d3246c1026f538bfc1caf6e3b22d63d5f39e57d4
 
 
 #endif /* _slist_H_ */
