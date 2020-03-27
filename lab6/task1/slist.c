@@ -101,16 +101,23 @@ void slist_destroy(struct slist *l)
  	*
  	* @param l pointer tot he list
  	*/
-	struct snode *tbd, *next; //tbd -- snode TO BE DESTROYED
+	struct snode * tbd, *next; //tbd -- snode TO BE DESTROYED
 	tbd = l->front;
-	next = tbd->next;
+	next = NULL;
+	if(tbd != NULL){
+		next = tbd->next;
+	}
+	
 
 	while(next != NULL){
 		snode_destroy(tbd);
 		tbd = next;
 		next = tbd->next;
 	}
-	snode_destroy(tbd);
+	if(tbd != NULL){
+		snode_destroy(tbd);
+	}
+	
 	free(l);
 
 };
