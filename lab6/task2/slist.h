@@ -62,7 +62,7 @@ struct list_t {
 //struct snode * slist_get_front(struct list_t *list);
 //struct snode * slist_get_back(struct list_t *list);
 
-struct snode *slist_find_at(struct list_t *list, int index);
+struct snode *slist_find_at(struct slist *list, int index);
 
 
 

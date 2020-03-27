@@ -100,16 +100,28 @@ struct snode* slist_find(struct slist *l, char *str)
 	return NULL;
 };
 
-struct snode *slist_find_at(struct list_t *list, int index)
+struct snode *slist_find_at(struct slist *list, int index)
 {
 
 	struct snode *temp;
 	temp = list->front;
 	int num = 0;
 	int length = list->size;
-	int num1 = 0;
-	while(temp != NULL)
-	{
+	if(index < 0){
+		if(index*(-1) > length){
+			return NULL;
+		}
+		num = length + index;
+	} else {
+		if(index > length){
+			return NULL;
+		}
+		num = index;
+	}
+	//int num1 = 0;
+	for(int i = 0; i < num; i++){
+		temp = temp->next;
+		/*
 		if(num == index)
 		{
 			return temp;
@@ -129,9 +141,11 @@ struct snode *slist_find_at(struct list_t *list, int index)
 			}
 			//return temp;
 		}
-	return temp;
+		*/
+	
 	}
-	return NULL;
+	
+	return temp;
 };
 
 
