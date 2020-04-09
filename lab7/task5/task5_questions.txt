@@ -9,4 +9,4 @@ lea     rax, [rbp-8]
 
 
 2.Where is the password “secret” stored?
-It's being stored in the ESI register
+It's being stored in the non-volatile ESI register
