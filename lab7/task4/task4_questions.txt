@@ -1,4 +1,11 @@
 1.What instructions evaluate “a>6”?
+        cmp     DWORD PTR [rbp-4], 6
+        jle     .L2
+
 2.What happens if we delete the “jmp” instruction?
+
+if we delete the jmp instruction, the program will not follow the correct order. in the event the "IF" statement is true, it ignores the "ELSE" because the jmp instructions skips it.  If we remove the jmp, then the program would carry out both the IF and ELSE statements even though it shouldn't.
+
 3.Can you rewrite the condition with “jg” in place of “jle”? Why or why not?
 
+no. jg is going to jump if the compared value is greater. jle will jump is the compared value is lesser than or equal to.  these have opposite functions and couldn't replace one another without needing to rewrite the code around them.
