@@ -1,3 +1,12 @@
 1.By searching the function name “strcmp” in the assembly text, what instruction calls strcmp?
-2.Where is the password “secret” stored?
 
+lea     rax, [rbp-8]
+        mov     esi, OFFSET FLAT:password
+        mov     rdi, rax
+        call    strcmp
+        test    eax, eax
+        jne     .L2
+
+
+2.Where is the password “secret” stored?
+It's being stored in the ESI register
