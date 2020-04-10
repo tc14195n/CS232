@@ -30,10 +30,11 @@ int msb(int x) {
 	//                        |
 	//                        ep
 	// in which * is a wild card which could be 0 or 1                   
-	int w, ep;
-	w=32; // Number of bits that might contain most significant 1
+	int w, ep, hw;
+	w=31; // Number of bits that might contain most significant 1
 	ep=0; // Rightmost bit that might contain most significant 1
-	while(w>1) { //Narrow down to a single bit
+	hw = (w / 2) + 1;
+	while((w - ep) > 1) { //Narrow down to a single bit
 		//TODO: Look at half the range of bits
 		//TODO: create a mask.
 		// This mask is all one-bits in the left half of the range
@@ -44,21 +45,23 @@ int msb(int x) {
 		//TODO: You have ruled out either the left half of the range or the right half of the range
 		//set up ep and w accordingly
 
-		w = w/2;
-		int mid = (w + ep) / 2;
-		int mask = (1 << mid) - (1 << w);
-		printf("M= "); print_binary(mask); printf(" w=%d ep=%d\n",w,ep);
-		if((mask && x) > 0)
+		int mid = (w + ep + 1) / 2;
+		int mask = (1 << w) - (1 << mid);
+	
+		printf("M= "); print_binary(mask); printf(" hw=%d ep=%d\n",hw,ep);
+		hw = hw / 2;
+		if((mask & x) > 0)
 		{
 			ep = mid;
 		}
-	
+
 		else
 		{
 			w = mid;
 		}
 
 	}
+
 	return ep;
 }
 //Do not modify print_binary

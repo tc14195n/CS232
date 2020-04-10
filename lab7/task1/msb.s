@@ -249,7 +249,7 @@ int main(int argc, char **argv) {
 	print_binary(x); 
  5e9:	83 ec 0c             	sub    $0xc,%esp
  5ec:	ff 75 f4             	pushl  -0xc(%ebp)
- 5ef:	e8 33 01 00 00       	call   727 <print_binary>
+ 5ef:	e8 3b 01 00 00       	call   72f <print_binary>
  5f4:	83 c4 10             	add    $0x10,%esp
 /home/jdoe/CS232_new_dir/CS232/lab7/task1/msb.c:17
 	printf("\n");
@@ -291,7 +291,7 @@ int msb(int x) {
  638:	89 e5                	mov    %esp,%ebp
  63a:	56                   	push   %esi
  63b:	53                   	push   %ebx
- 63c:	83 ec 10             	sub    $0x10,%esp
+ 63c:	83 ec 20             	sub    $0x20,%esp
  63f:	e8 3c fe ff ff       	call   480 <__x86.get_pc_thunk.bx>
  644:	81 c3 8c 19 00 00    	add    $0x198c,%ebx
 /home/jdoe/CS232_new_dir/CS232/lab7/task1/msb.c:23
@@ -300,187 +300,187 @@ int msb(int x) {
  64e:	75 0a                	jne    65a <msb+0x23>
 /home/jdoe/CS232_new_dir/CS232/lab7/task1/msb.c:23 (discriminator 1)
  650:	b8 ff ff ff ff       	mov    $0xffffffff,%eax
- 655:	e9 c6 00 00 00       	jmp    720 <msb+0xe9>
+ 655:	e9 ce 00 00 00       	jmp    728 <msb+0xf1>
 /home/jdoe/CS232_new_dir/CS232/lab7/task1/msb.c:34
 	//                        ^
 	//                        |
 	//                        ep
 	// in which * is a wild card which could be 0 or 1                   
-	int w, ep;
-	w=32; // Number of bits that might contain most significant 1
- 65a:	c7 45 e8 20 00 00 00 	movl   $0x20,-0x18(%ebp)
+	int w, ep, hw;
+	w=31; // Number of bits that might contain most significant 1
+ 65a:	c7 45 e4 1f 00 00 00 	movl   $0x1f,-0x1c(%ebp)
 /home/jdoe/CS232_new_dir/CS232/lab7/task1/msb.c:35
 	ep=0; // Rightmost bit that might contain most significant 1
- 661:	c7 45 ec 00 00 00 00 	movl   $0x0,-0x14(%ebp)
+ 661:	c7 45 e8 00 00 00 00 	movl   $0x0,-0x18(%ebp)
 /home/jdoe/CS232_new_dir/CS232/lab7/task1/msb.c:36
-	while(w>1) { //Narrow down to a single bit
- 668:	e9 a6 00 00 00       	jmp    713 <msb+0xdc>
-/home/jdoe/CS232_new_dir/CS232/lab7/task1/msb.c:47
+	hw = (w / 2) + 1;
+ 668:	8b 45 e4             	mov    -0x1c(%ebp),%eax
+ 66b:	89 c2                	mov    %eax,%edx
+ 66d:	c1 ea 1f             	shr    $0x1f,%edx
+ 670:	01 d0                	add    %edx,%eax
+ 672:	d1 f8                	sar    %eax
+ 674:	83 c0 01             	add    $0x1,%eax
+ 677:	89 45 ec             	mov    %eax,-0x14(%ebp)
+/home/jdoe/CS232_new_dir/CS232/lab7/task1/msb.c:37
+	while((w - ep) > 1) { //Narrow down to a single bit
+ 67a:	e9 97 00 00 00       	jmp    716 <msb+0xdf>
+/home/jdoe/CS232_new_dir/CS232/lab7/task1/msb.c:48
 		//If the left half of the range has a one bit, focus on only the left half
 		//else focus on only the right half
 		//TODO: You have ruled out either the left half of the range or the right half of the range
 		//set up ep and w accordingly
 
-		w = w/2;
- 66d:	8b 45 e8             	mov    -0x18(%ebp),%eax
- 670:	89 c2                	mov    %eax,%edx
- 672:	c1 ea 1f             	shr    $0x1f,%edx
- 675:	01 d0                	add    %edx,%eax
- 677:	d1 f8                	sar    %eax
- 679:	89 45 e8             	mov    %eax,-0x18(%ebp)
-/home/jdoe/CS232_new_dir/CS232/lab7/task1/msb.c:48
-		int mid = (w + ep) / 2;
- 67c:	8b 55 e8             	mov    -0x18(%ebp),%edx
- 67f:	8b 45 ec             	mov    -0x14(%ebp),%eax
- 682:	01 d0                	add    %edx,%eax
- 684:	89 c2                	mov    %eax,%edx
- 686:	c1 ea 1f             	shr    $0x1f,%edx
- 689:	01 d0                	add    %edx,%eax
- 68b:	d1 f8                	sar    %eax
- 68d:	89 45 f0             	mov    %eax,-0x10(%ebp)
+		int mid = (w + ep + 1) / 2;
+ 67f:	8b 55 e4             	mov    -0x1c(%ebp),%edx
+ 682:	8b 45 e8             	mov    -0x18(%ebp),%eax
+ 685:	01 d0                	add    %edx,%eax
+ 687:	83 c0 01             	add    $0x1,%eax
+ 68a:	89 c2                	mov    %eax,%edx
+ 68c:	c1 ea 1f             	shr    $0x1f,%edx
+ 68f:	01 d0                	add    %edx,%eax
+ 691:	d1 f8                	sar    %eax
+ 693:	89 45 f0             	mov    %eax,-0x10(%ebp)
 /home/jdoe/CS232_new_dir/CS232/lab7/task1/msb.c:49
-		int mask = (1 << mid) - (1 << w);
- 690:	8b 45 f0             	mov    -0x10(%ebp),%eax
- 693:	ba 01 00 00 00       	mov    $0x1,%edx
- 698:	89 c1                	mov    %eax,%ecx
- 69a:	d3 e2                	shl    %cl,%edx
- 69c:	8b 45 e8             	mov    -0x18(%ebp),%eax
- 69f:	be 01 00 00 00       	mov    $0x1,%esi
- 6a4:	89 c1                	mov    %eax,%ecx
- 6a6:	d3 e6                	shl    %cl,%esi
- 6a8:	89 f0                	mov    %esi,%eax
- 6aa:	29 c2                	sub    %eax,%edx
- 6ac:	89 d0                	mov    %edx,%eax
- 6ae:	89 45 f4             	mov    %eax,-0xc(%ebp)
-/home/jdoe/CS232_new_dir/CS232/lab7/task1/msb.c:50
-		printf("M= "); print_binary(mask); printf(" w=%d ep=%d\n",w,ep);
- 6b1:	83 ec 0c             	sub    $0xc,%esp
- 6b4:	8d 83 b2 e8 ff ff    	lea    -0x174e(%ebx),%eax
- 6ba:	50                   	push   %eax
- 6bb:	e8 30 fd ff ff       	call   3f0 <printf@plt>
- 6c0:	83 c4 10             	add    $0x10,%esp
- 6c3:	83 ec 0c             	sub    $0xc,%esp
- 6c6:	ff 75 f4             	pushl  -0xc(%ebp)
- 6c9:	e8 59 00 00 00       	call   727 <print_binary>
- 6ce:	83 c4 10             	add    $0x10,%esp
- 6d1:	83 ec 04             	sub    $0x4,%esp
- 6d4:	ff 75 ec             	pushl  -0x14(%ebp)
- 6d7:	ff 75 e8             	pushl  -0x18(%ebp)
- 6da:	8d 83 b6 e8 ff ff    	lea    -0x174a(%ebx),%eax
- 6e0:	50                   	push   %eax
- 6e1:	e8 0a fd ff ff       	call   3f0 <printf@plt>
- 6e6:	83 c4 10             	add    $0x10,%esp
+		int mask = (1 << w) - (1 << mid);
+ 696:	8b 45 e4             	mov    -0x1c(%ebp),%eax
+ 699:	ba 01 00 00 00       	mov    $0x1,%edx
+ 69e:	89 c1                	mov    %eax,%ecx
+ 6a0:	d3 e2                	shl    %cl,%edx
+ 6a2:	8b 45 f0             	mov    -0x10(%ebp),%eax
+ 6a5:	be 01 00 00 00       	mov    $0x1,%esi
+ 6aa:	89 c1                	mov    %eax,%ecx
+ 6ac:	d3 e6                	shl    %cl,%esi
+ 6ae:	89 f0                	mov    %esi,%eax
+ 6b0:	29 c2                	sub    %eax,%edx
+ 6b2:	89 d0                	mov    %edx,%eax
+ 6b4:	89 45 f4             	mov    %eax,-0xc(%ebp)
 /home/jdoe/CS232_new_dir/CS232/lab7/task1/msb.c:51
-		if((mask && x) > 0)
- 6e9:	83 7d f4 00          	cmpl   $0x0,-0xc(%ebp)
- 6ed:	74 0d                	je     6fc <msb+0xc5>
-/home/jdoe/CS232_new_dir/CS232/lab7/task1/msb.c:51 (discriminator 1)
- 6ef:	83 7d 08 00          	cmpl   $0x0,0x8(%ebp)
- 6f3:	74 07                	je     6fc <msb+0xc5>
-/home/jdoe/CS232_new_dir/CS232/lab7/task1/msb.c:51 (discriminator 3)
- 6f5:	b8 01 00 00 00       	mov    $0x1,%eax
- 6fa:	eb 05                	jmp    701 <msb+0xca>
-/home/jdoe/CS232_new_dir/CS232/lab7/task1/msb.c:51 (discriminator 4)
- 6fc:	b8 00 00 00 00       	mov    $0x0,%eax
-/home/jdoe/CS232_new_dir/CS232/lab7/task1/msb.c:51 (discriminator 6)
- 701:	85 c0                	test   %eax,%eax
- 703:	7e 08                	jle    70d <msb+0xd6>
+	
+		printf("M= "); print_binary(mask); printf(" hw=%d ep=%d\n",hw,ep);
+ 6b7:	83 ec 0c             	sub    $0xc,%esp
+ 6ba:	8d 83 b2 e8 ff ff    	lea    -0x174e(%ebx),%eax
+ 6c0:	50                   	push   %eax
+ 6c1:	e8 2a fd ff ff       	call   3f0 <printf@plt>
+ 6c6:	83 c4 10             	add    $0x10,%esp
+ 6c9:	83 ec 0c             	sub    $0xc,%esp
+ 6cc:	ff 75 f4             	pushl  -0xc(%ebp)
+ 6cf:	e8 5b 00 00 00       	call   72f <print_binary>
+ 6d4:	83 c4 10             	add    $0x10,%esp
+ 6d7:	83 ec 04             	sub    $0x4,%esp
+ 6da:	ff 75 e8             	pushl  -0x18(%ebp)
+ 6dd:	ff 75 ec             	pushl  -0x14(%ebp)
+ 6e0:	8d 83 b6 e8 ff ff    	lea    -0x174a(%ebx),%eax
+ 6e6:	50                   	push   %eax
+ 6e7:	e8 04 fd ff ff       	call   3f0 <printf@plt>
+ 6ec:	83 c4 10             	add    $0x10,%esp
+/home/jdoe/CS232_new_dir/CS232/lab7/task1/msb.c:52
+		hw = hw / 2;
+ 6ef:	8b 45 ec             	mov    -0x14(%ebp),%eax
+ 6f2:	89 c2                	mov    %eax,%edx
+ 6f4:	c1 ea 1f             	shr    $0x1f,%edx
+ 6f7:	01 d0                	add    %edx,%eax
+ 6f9:	d1 f8                	sar    %eax
+ 6fb:	89 45 ec             	mov    %eax,-0x14(%ebp)
 /home/jdoe/CS232_new_dir/CS232/lab7/task1/msb.c:53
+		if((mask & x) > 0)
+ 6fe:	8b 45 f4             	mov    -0xc(%ebp),%eax
+ 701:	23 45 08             	and    0x8(%ebp),%eax
+ 704:	85 c0                	test   %eax,%eax
+ 706:	7e 08                	jle    710 <msb+0xd9>
+/home/jdoe/CS232_new_dir/CS232/lab7/task1/msb.c:55
 		{
 			ep = mid;
- 705:	8b 45 f0             	mov    -0x10(%ebp),%eax
- 708:	89 45 ec             	mov    %eax,-0x14(%ebp)
- 70b:	eb 06                	jmp    713 <msb+0xdc>
-/home/jdoe/CS232_new_dir/CS232/lab7/task1/msb.c:58
+ 708:	8b 45 f0             	mov    -0x10(%ebp),%eax
+ 70b:	89 45 e8             	mov    %eax,-0x18(%ebp)
+ 70e:	eb 06                	jmp    716 <msb+0xdf>
+/home/jdoe/CS232_new_dir/CS232/lab7/task1/msb.c:60
 		}
-	
+
 		else
 		{
 			w = mid;
- 70d:	8b 45 f0             	mov    -0x10(%ebp),%eax
- 710:	89 45 e8             	mov    %eax,-0x18(%ebp)
-/home/jdoe/CS232_new_dir/CS232/lab7/task1/msb.c:36
-	while(w>1) { //Narrow down to a single bit
- 713:	83 7d e8 01          	cmpl   $0x1,-0x18(%ebp)
- 717:	0f 8f 50 ff ff ff    	jg     66d <msb+0x36>
-/home/jdoe/CS232_new_dir/CS232/lab7/task1/msb.c:62
+ 710:	8b 45 f0             	mov    -0x10(%ebp),%eax
+ 713:	89 45 e4             	mov    %eax,-0x1c(%ebp)
+/home/jdoe/CS232_new_dir/CS232/lab7/task1/msb.c:37
+	while((w - ep) > 1) { //Narrow down to a single bit
+ 716:	8b 45 e4             	mov    -0x1c(%ebp),%eax
+ 719:	2b 45 e8             	sub    -0x18(%ebp),%eax
+ 71c:	83 f8 01             	cmp    $0x1,%eax
+ 71f:	0f 8f 5a ff ff ff    	jg     67f <msb+0x48>
+/home/jdoe/CS232_new_dir/CS232/lab7/task1/msb.c:64
 		}
 
 	}
 	return ep;
- 71d:	8b 45 ec             	mov    -0x14(%ebp),%eax
-/home/jdoe/CS232_new_dir/CS232/lab7/task1/msb.c:63
-}
- 720:	8d 65 f8             	lea    -0x8(%ebp),%esp
- 723:	5b                   	pop    %ebx
- 724:	5e                   	pop    %esi
- 725:	5d                   	pop    %ebp
- 726:	c3                   	ret    
-
-00000727 <print_binary>:
-print_binary():
+ 725:	8b 45 e8             	mov    -0x18(%ebp),%eax
 /home/jdoe/CS232_new_dir/CS232/lab7/task1/msb.c:65
+}
+ 728:	8d 65 f8             	lea    -0x8(%ebp),%esp
+ 72b:	5b                   	pop    %ebx
+ 72c:	5e                   	pop    %esi
+ 72d:	5d                   	pop    %ebp
+ 72e:	c3                   	ret    
+
+0000072f <print_binary>:
+print_binary():
+/home/jdoe/CS232_new_dir/CS232/lab7/task1/msb.c:67
 //Do not modify print_binary
 void print_binary(int n) {
- 727:	55                   	push   %ebp
- 728:	89 e5                	mov    %esp,%ebp
- 72a:	53                   	push   %ebx
- 72b:	83 ec 14             	sub    $0x14,%esp
- 72e:	e8 4d fd ff ff       	call   480 <__x86.get_pc_thunk.bx>
- 733:	81 c3 9d 18 00 00    	add    $0x189d,%ebx
-/home/jdoe/CS232_new_dir/CS232/lab7/task1/msb.c:67
+ 72f:	55                   	push   %ebp
+ 730:	89 e5                	mov    %esp,%ebp
+ 732:	53                   	push   %ebx
+ 733:	83 ec 14             	sub    $0x14,%esp
+ 736:	e8 45 fd ff ff       	call   480 <__x86.get_pc_thunk.bx>
+ 73b:	81 c3 95 18 00 00    	add    $0x1895,%ebx
+/home/jdoe/CS232_new_dir/CS232/lab7/task1/msb.c:69
 	int i;
 	for(i=31;i>=0;i--) {
- 739:	c7 45 f4 1f 00 00 00 	movl   $0x1f,-0xc(%ebp)
- 740:	eb 46                	jmp    788 <print_binary+0x61>
-/home/jdoe/CS232_new_dir/CS232/lab7/task1/msb.c:68
+ 741:	c7 45 f4 1f 00 00 00 	movl   $0x1f,-0xc(%ebp)
+ 748:	eb 46                	jmp    790 <print_binary+0x61>
+/home/jdoe/CS232_new_dir/CS232/lab7/task1/msb.c:70
 		printf("%c",(n&1<<i)?'1':'0');
- 742:	8b 45 f4             	mov    -0xc(%ebp),%eax
- 745:	8b 55 08             	mov    0x8(%ebp),%edx
- 748:	89 c1                	mov    %eax,%ecx
- 74a:	d3 fa                	sar    %cl,%edx
- 74c:	89 d0                	mov    %edx,%eax
- 74e:	83 e0 01             	and    $0x1,%eax
- 751:	85 c0                	test   %eax,%eax
- 753:	74 07                	je     75c <print_binary+0x35>
-/home/jdoe/CS232_new_dir/CS232/lab7/task1/msb.c:68 (discriminator 1)
- 755:	b8 31 00 00 00       	mov    $0x31,%eax
- 75a:	eb 05                	jmp    761 <print_binary+0x3a>
-/home/jdoe/CS232_new_dir/CS232/lab7/task1/msb.c:68 (discriminator 2)
- 75c:	b8 30 00 00 00       	mov    $0x30,%eax
-/home/jdoe/CS232_new_dir/CS232/lab7/task1/msb.c:68 (discriminator 4)
- 761:	83 ec 0c             	sub    $0xc,%esp
- 764:	50                   	push   %eax
- 765:	e8 a6 fc ff ff       	call   410 <putchar@plt>
- 76a:	83 c4 10             	add    $0x10,%esp
-/home/jdoe/CS232_new_dir/CS232/lab7/task1/msb.c:69 (discriminator 4)
+ 74a:	8b 45 f4             	mov    -0xc(%ebp),%eax
+ 74d:	8b 55 08             	mov    0x8(%ebp),%edx
+ 750:	89 c1                	mov    %eax,%ecx
+ 752:	d3 fa                	sar    %cl,%edx
+ 754:	89 d0                	mov    %edx,%eax
+ 756:	83 e0 01             	and    $0x1,%eax
+ 759:	85 c0                	test   %eax,%eax
+ 75b:	74 07                	je     764 <print_binary+0x35>
+/home/jdoe/CS232_new_dir/CS232/lab7/task1/msb.c:70 (discriminator 1)
+ 75d:	b8 31 00 00 00       	mov    $0x31,%eax
+ 762:	eb 05                	jmp    769 <print_binary+0x3a>
+/home/jdoe/CS232_new_dir/CS232/lab7/task1/msb.c:70 (discriminator 2)
+ 764:	b8 30 00 00 00       	mov    $0x30,%eax
+/home/jdoe/CS232_new_dir/CS232/lab7/task1/msb.c:70 (discriminator 4)
+ 769:	83 ec 0c             	sub    $0xc,%esp
+ 76c:	50                   	push   %eax
+ 76d:	e8 9e fc ff ff       	call   410 <putchar@plt>
+ 772:	83 c4 10             	add    $0x10,%esp
+/home/jdoe/CS232_new_dir/CS232/lab7/task1/msb.c:71 (discriminator 4)
 		if (0==i%4) printf(" ");
- 76d:	8b 45 f4             	mov    -0xc(%ebp),%eax
- 770:	83 e0 03             	and    $0x3,%eax
- 773:	85 c0                	test   %eax,%eax
- 775:	75 0d                	jne    784 <print_binary+0x5d>
-/home/jdoe/CS232_new_dir/CS232/lab7/task1/msb.c:69 (discriminator 1)
- 777:	83 ec 0c             	sub    $0xc,%esp
- 77a:	6a 20                	push   $0x20
- 77c:	e8 8f fc ff ff       	call   410 <putchar@plt>
- 781:	83 c4 10             	add    $0x10,%esp
-/home/jdoe/CS232_new_dir/CS232/lab7/task1/msb.c:67 (discriminator 2)
+ 775:	8b 45 f4             	mov    -0xc(%ebp),%eax
+ 778:	83 e0 03             	and    $0x3,%eax
+ 77b:	85 c0                	test   %eax,%eax
+ 77d:	75 0d                	jne    78c <print_binary+0x5d>
+/home/jdoe/CS232_new_dir/CS232/lab7/task1/msb.c:71 (discriminator 1)
+ 77f:	83 ec 0c             	sub    $0xc,%esp
+ 782:	6a 20                	push   $0x20
+ 784:	e8 87 fc ff ff       	call   410 <putchar@plt>
+ 789:	83 c4 10             	add    $0x10,%esp
+/home/jdoe/CS232_new_dir/CS232/lab7/task1/msb.c:69 (discriminator 2)
 	for(i=31;i>=0;i--) {
- 784:	83 6d f4 01          	subl   $0x1,-0xc(%ebp)
-/home/jdoe/CS232_new_dir/CS232/lab7/task1/msb.c:67 (discriminator 1)
- 788:	83 7d f4 00          	cmpl   $0x0,-0xc(%ebp)
- 78c:	79 b4                	jns    742 <print_binary+0x1b>
-/home/jdoe/CS232_new_dir/CS232/lab7/task1/msb.c:71
+ 78c:	83 6d f4 01          	subl   $0x1,-0xc(%ebp)
+/home/jdoe/CS232_new_dir/CS232/lab7/task1/msb.c:69 (discriminator 1)
+ 790:	83 7d f4 00          	cmpl   $0x0,-0xc(%ebp)
+ 794:	79 b4                	jns    74a <print_binary+0x1b>
+/home/jdoe/CS232_new_dir/CS232/lab7/task1/msb.c:73
 	}
 }
- 78e:	90                   	nop
- 78f:	8b 5d fc             	mov    -0x4(%ebp),%ebx
- 792:	c9                   	leave  
- 793:	c3                   	ret    
- 794:	66 90                	xchg   %ax,%ax
- 796:	66 90                	xchg   %ax,%ax
- 798:	66 90                	xchg   %ax,%ax
- 79a:	66 90                	xchg   %ax,%ax
+ 796:	90                   	nop
+ 797:	8b 5d fc             	mov    -0x4(%ebp),%ebx
+ 79a:	c9                   	leave  
+ 79b:	c3                   	ret    
  79c:	66 90                	xchg   %ax,%ax
  79e:	66 90                	xchg   %ax,%ax
 
