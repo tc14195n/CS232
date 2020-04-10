@@ -8,10 +8,14 @@ int main() {
     
     
     for(i = 0; i < 8; i++){
-
-        if(64 < i){
+    
+        if(64 < input[i] && 90 >= input[i]){
+            input[i] = input[i] + 32;
             
-        } 
+        }
+    
+        
+        
     }
     
 
