@@ -9,3 +9,5 @@ if we delete the jmp instruction, the program will not follow the correct order.
 3.Can you rewrite the condition with “jg” in place of “jle”? Why or why not?
 
 no. jg is going to jump if the compared value is greater. jle will jump is the compared value is lesser than or equal to.  these have opposite functions and couldn't replace one another without needing to rewrite the code around them.
+
+JYM: it is possible to swap jg with jle as long as you also swap both code blocks with jump targets.
