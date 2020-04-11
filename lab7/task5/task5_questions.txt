@@ -7,6 +7,8 @@ lea     rax, [rbp-8]
         test    eax, eax
         jne     .L2
 
+JYM: wrong compiler you are using?
 
 2.Where is the password “secret” stored?
 It's being stored in the non-volatile ESI register
+JYM: where does constants get stored when we discussed it during first half of semester?
