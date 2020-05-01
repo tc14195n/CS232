@@ -1,5 +1,6 @@
 #1 When the end of the trace file is reached a summary of your cache simulator should be printed out. Please leave the summary of your cache simulator here.
 
+
 Its a Miss 0x8000000f 0x00000000
  0x00000000 0x00000000
  0x00000000 0x00000000
