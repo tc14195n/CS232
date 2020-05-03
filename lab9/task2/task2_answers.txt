@@ -1,5 +1,8 @@
 #1: What function does the line i = (addr >> 2) & 7; serve in the simulation?
+this line is taking the 3 least significant bits in the address, the 3 right most bits. they are used to check the tags array and they are a shorthand representation of the original address.
 
 #2: Compile and execute the direct-mapped cache simulator given in the task. Report the final number of hits and accesses output by the code. Also, based on the pattern of cache hits, estimate the hit rate of the given trace in the steady state (once the compulsory misses are accounted for).
 Hits = 68, Accesses = 103, Hit ratio = 0.660194
+
 #3: Our implementation of a simple, direct-mapped cache simulator only uses and maintains the tags in its simulation. Why is this enough to get a working example of cache behavior?
+We're only trying to emulate the behavior of a cache as far as data checking is concerned.  we're not actually getting the data back in this example. we're only showing the total numbers of hits. this still shows how a cache is supposed to work in general.  
