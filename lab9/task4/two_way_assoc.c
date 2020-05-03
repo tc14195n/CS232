@@ -23,7 +23,7 @@ int main( )
         {
             if(tag[index][k] == tg)
             {
-                printf("Status: Hit");
+                printf(" Status: Hit ");
                 mru[index] = k;
                 hits++;
             }
@@ -31,7 +31,7 @@ int main( )
 
         if(k == 2)
         {
-            printf("Status: Miss");
+            printf(" Status: Miss ");
             int x = (mru[index] + 1)%2;
             tag[index][x] = tg;
             mru[index] = x;
