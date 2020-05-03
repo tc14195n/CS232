@@ -15,27 +15,26 @@ int main( )
     while(fscanf(fp, "%x", &addr) > 0)
 	{
 	accesses++;
-        int ind = (addr >> 2) & 3;
+        int index = (addr > 2) & 3;
         int k;
         int tg = addr | 0xf;
 
         for(k = 0; k < 2; k++)
         {
-            if(tag[ind][k] == tg)
+            if(tag[index][k] == tg)
             {
-                printf("Its a Hit");
-                mru[ind] = k;
+                printf(" Status: Hit ");
+                mru[index] = k;
                 hits++;
-                break;
             }
         }
 
         if(k == 2)
         {
-            printf("Its a Miss");
-            int x = (mru[ind] + 1)%2;
-            tag[ind][x] = tg;
-            mru[ind] = x;
+            printf(" Status: Miss ");
+            int x = (mru[index] + 1)%2;
+            tag[index][x] = tg;
+            mru[index] = x;
         }
 
         for(int i = 0; i < 4; i++)
@@ -45,7 +44,6 @@ int main( )
 
         for(int i = 0; i < 4; i++)
             printf("%d ", mru[i]);
-        printf("\n");
 
 	}
 
@@ -53,3 +51,4 @@ int main( )
     fclose(fp);
 
 }
+
