@@ -3,58 +3,58 @@ Table for yi.trace when set index bits =4, block offset bit = 4 using direct map
 ----------------------------------------------------------------
  trace	|Your analysis(miss/hit, set/index id)	|csim-ref output
 ----------------------------------------------------------------   
- L 10,1	|					|	 	 
- M 20,1	|					|	 	 
- L 22,1	|					|	 	 
- S 18,1	|	 	 			|
- L 110,1|	 	 			|
- L 210,1|	 	 			|
- M 12,1	|					|	 	 
+ L 10,1	|					|miss	 	 
+ M 20,1	|					|miss hit	 	 
+ L 22,1	|					|hit	 	 
+ S 18,1	|	 	 			|hit
+ L 110,1|	 	 			|miss eviction
+ L 210,1|	 	 			|miss eviction
+ M 12,1	|					|miss eviction hit	 	 
 -----------------------------------------------------------------
 
 Table for yi.trace when set index bits =4, block offset bit = 4 using 2 lines per set:
 ----------------------------------------------------------------
  trace	|Your analysis(miss/hit, set/index id)	|csim-ref output
 ---------------------------------------------------------------- 
- L 10,1	|					|	 	 
- M 20,1	|					|	 	 
- L 22,1	|					|	 	 
- S 18,1	|					|	 	 
- L 110,1|					|	 	 
- L 210,1|					|	 	 
- M 12,1	|					|	 	 
+ L 10,1	|					|miss	 	 
+ M 20,1	|					|miss hit	 	 
+ L 22,1	|					|hit	 	 
+ S 18,1	|					|hit	 	 
+ L 110,1|					|miss	 	 
+ L 210,1|					|miss eviction	 	 
+ M 12,1	|					|miss eviction hit	 	 
 ----------------------------------------------------------------
 
 Table for yi.trace when set index bits =4, block offset bit = 2 using direct map cache:
 -----------------------------------------------------------------
  trace	|Your analysis(miss/hit, set/index id)	|csim-ref output
 -----------------------------------------------------------------   
- L 10,1	|					|	 	 
- M 20,1	|					|	 	 
- L 22,1	|					|	 	 
- S 18,1	|					|	 	 
- L 110,1|					|	 	 
- L 210,1|					|	 	 
- M 12,1	|					|
+ L 10,1	|					|miss	 	 
+ M 20,1	|					|miss hit	 	 
+ L 22,1	|					|hit	 	 
+ S 18,1	|					|miss	 	 
+ L 110,1|					|miss eviction	 	 
+ L 210,1|					|miss eviction	 	 
+ M 12,1	|					|miss eviction hit
 -----------------------------------------------------------------	 	 
 Table for dave.trace when set index bits =4, block offset bit = 4 using direct map cache:
 -----------------------------------------------------------------
  trace	|Your analysis(miss/hit, set/index id)	|csim-ref output
 -----------------------------------------------------------------   
- L 10,4	|					|	 	 
- S 18,4	|					|	 	 
- L 20,4	|					|	 	 
- S 28,4	|					|	 	 
- S 50,4	|					|	 	 
+ L 10,4	|					|miss	 	 
+ S 18,4	|					|hit	 	 
+ L 20,4	|					|miss	 	 
+ S 28,4	|					|hit	 	 
+ S 50,4	|					|miss	 	 
 -----------------------------------------------------------------
 
 Table for dave.trace when set index bits =4, block offset bit = 2 using direct map cache:
 -----------------------------------------------------------------
  trace	|Your analysis(miss/hit, set/index id)	|csim-ref output
 -----------------------------------------------------------------   
- L 10,4	|					|	 	 
- S 18,4	|					|	 	 
- L 20,4	|					|	 	 
- S 28,4	|					|	 	 
- S 50,4	|					|
+ L 10,4	|					|miss	 	 
+ S 18,4	|					|miss	 	 
+ L 20,4	|					|miss	 	 
+ S 28,4	|					|miss	 	 
+ S 50,4	|					|miss eviction
 ----------------------------------------------------------------	 	 
