@@ -1,4 +1,6 @@
 #1: Explain the newly-added function mruUpdate(), briefly outlining its purpose, how it works, and why we would want or need such a function in our fully-associative cache simulator.
+	This function replaces the block accessed nearest in the past. This makes it so the older an item is, the more likely it is to be accessed. On a hit in the cache the order is updated.
 
 #2: Compile and execute the fully-associative cache simulator in the task. Report the final number of hits and accesses output by the code. Based on the pattern of cache hits, estimate the hit rate of the given trace in the steady state (once the compulsory misses are accounted for).
 Hits = 76, Accesses = 103, Hit ratio = 0.737864
+
