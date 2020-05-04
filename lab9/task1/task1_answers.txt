@@ -4,57 +4,57 @@ Table for yi.trace when set index bits =4, block offset bit = 4 using direct map
  trace	|Your analysis(miss/hit, set/index id)	|csim-ref output
 ----------------------------------------------------------------   
  L 10,1	|Miss, nothing loaded in cache yet	|miss	 	 
- M 20,1	| miss 0b0001				|miss hit	 	 
- L 22,1	| miss 0b0001				|hit	 	 
- S 18,1	| miss 0b0001 	 			|hit
- L 110,1| miss 0b0001 	 			|miss eviction
- L 210,1| miss 0b0001 	 			|miss eviction
- M 12,1	| miss 0b0000				|miss eviction hit	 	 
+ M 20,1	| miss 0b0001/0000			|miss hit	 	 
+ L 22,1	| miss 0b0001/0000			|hit	 	 
+ S 18,1	| miss 0b0001/0000			|hit
+ L 110,1| miss 0b0001/0001			|miss eviction
+ L 210,1| miss 0b0001/0001	 		|miss eviction
+ M 12,1	| miss 0b0000/0000			|miss eviction hit	 	 
 -----------------------------------------------------------------
 
 Table for yi.trace when set index bits =4, block offset bit = 4 using 2 lines per set:
 ----------------------------------------------------------------
  trace	|Your analysis(miss/hit, set/index id)	|csim-ref output
 ---------------------------------------------------------------- 
- L 10,1	|Miss, nothing loaded in cache yet	|miss	 	 
- M 20,1	|miss 0b0001				|miss hit	 	 
- L 22,1	|miss 0b0001				|hit	 	 
- S 18,1	|miss 0b0001				|hit	 	 
- L 110,1|miss 0b0001				|miss	 	 
- L 210,1|miss 0b0001				|miss eviction	 	 
- M 12,1	|miss 0b0000				|miss eviction hit	 	 
+ L 10,1	|Miss, nothing loaded in cache yet, 000000	|miss	 	 
+ M 20,1	|miss, 0b0001/0000				|miss hit	 	 
+ L 22,1	|miss, 0b0001/0000				|hit	 	 
+ S 18,1	|miss, 0b0001/0000				|hit	 	 
+ L 110,1|miss, 0b0001/0001				|miss	 	 
+ L 210,1|miss, 0b0001/0010				|miss eviction	 	 
+ M 12,1	|miss, 0b0000/0000				|miss eviction hit	 	 
 ----------------------------------------------------------------
 
 Table for yi.trace when set index bits =4, block offset bit = 2 using direct map cache:
 -----------------------------------------------------------------
  trace	|Your analysis(miss/hit, set/index id)	|csim-ref output
 -----------------------------------------------------------------   
- L 10,1	|Miss, 0b0010				|miss	 	 
- M 20,1	|0b0101					|miss hit	 	 
- L 22,1	|0b0101					|hit	 	 
- S 18,1	|0b0100					|miss	 	 
- L 110,1|0b0100					|miss eviction	 	 
- L 210,1|0b0100					|miss eviction	 	 
- M 12,1	|0b0011					|miss eviction hit
+ L 10,1	|Miss, 0b0010/000000					|miss	 	 
+ M 20,1	|Miss, 0b0101/000000					|miss hit	 	 
+ L 22,1	|Hit, 0b0101/000000					|hit	 	 
+ S 18,1	|Miss, 0b0100/000000					|miss	 	 
+ L 110,1|Hit, 0b0100/000100					|miss eviction	 	 
+ L 210,1|Miss, 0b0100/001000					|miss eviction	 	 
+ M 12,1	|Miss, 0b0011/000000					|miss eviction hit
 -----------------------------------------------------------------	 	 
 Table for dave.trace when set index bits =4, block offset bit = 4 using direct map cache:
 -----------------------------------------------------------------
  trace	|Your analysis(miss/hit, set/index id)	|csim-ref output
 -----------------------------------------------------------------   
- L 10,4	|Miss, 0b0000				|miss	 	 
- S 18,4	|0b0001					|hit	 	 
- L 20,4	|0b0001					|miss	 	 
- S 28,4	|0b0001					|hit	 	 
- S 50,4	|0b0011					|miss	 	 
+ L 10,4	|Miss, 0b0000/0000				|miss	 	 
+ S 18,4	|Miss, 0b0001/0000				|hit	 	 
+ L 20,4	|Hit, 0b0001/0000				|miss	 	 
+ S 28,4	|Miss, 0b0001/0000				|hit	 	 
+ S 50,4	|Miss, 0b0011/0000				|miss	 	 
 -----------------------------------------------------------------
 
 Table for dave.trace when set index bits =4, block offset bit = 2 using direct map cache:
 -----------------------------------------------------------------
  trace	|Your analysis(miss/hit, set/index id)	|csim-ref output
 -----------------------------------------------------------------   
- L 10,4	|Miss, 0b0010				|miss	 	 
- S 18,4	|0b0100					|miss	 	 
- L 20,4	|0b0101					|miss	 	 
- S 28,4	|0b0111					|miss	 	 
- S 50,4	|0b1100					|miss eviction
+ L 10,4	|Miss, 0b0010/000000				|miss	 	 
+ S 18,4	|Miss, 0b0100/000000				|miss	 	 
+ L 20,4	|Miss, 0b0101/000000				|miss	 	 
+ S 28,4	|Miss, 0b0111/000000				|miss	 	 
+ S 50,4	|Miss, 0b1100/000000				|miss eviction
 ----------------------------------------------------------------	 	 
