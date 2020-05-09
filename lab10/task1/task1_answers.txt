@@ -1,16 +1,19 @@
 1. Which order performs the worst? Why? Please write down the latency captured by time for the worst order.
+The worst performer is the "jki" version.  It goes up tremendously to greater than 98% miss rate past a matrix size of 128.
 2. Which order performs the best? Why? Please write down the latency captured by time for the best best.
+The best performer is the "ikj" version. The miss rate only goes up to 6.4% and stays fairly constant once the matrix 
 3. Does the way we stride through the matrices with respect to the innermost loop affect performance? 
 4. Please complete the following table using valgrind to measure D1 miss rate with regard to different matrix size.
 ________________________________________________________________________________
-|Cache miss w.r.t matrix size	|1024	|512	|256	|128	|64	|32	|
+|Cache miss w.r.t matrix size	|1024	|512	|256	|128	|64		|32		|
 |-------------------------------------------------------------------------------|
-|matrix_mult_ijk		|	|	|	|	|	|	|
+|matrix_mult_ijk				|35.4	|33.4	|33.4	|32.7	|1.8	|4.2	|
 |-------------------------------------------------------------------------------|
-|matrix_mult_jki		|	|	|	|	|	|	|
+|matrix_mult_jki				|100.0	|99.9	|99.7	|98.5	|3.5	|2.8	|
 |-------------------------------------------------------------------------------|
-|matrix_mult_ikj		|	|	|	|	|	|	|
+|matrix_mult_ikj				|6.3	|6.3	|6.3	|6.4	|1.4	|3.8	|
 |_______________________________|_______|_______|_______|_______|_______|_______|
 	
 5. Based on the table of q4, does the size of the matrix affect performance? Why? Have you noticed the cache miss rate dramatically changes upon a certain dim size? What is the size of the matrix when it happens? and why would it happen? 
+The size of the matrix does affect the performance. When the matrix goes from 64 to 128 is when the most significant jump occurs.
 
