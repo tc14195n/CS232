@@ -29,18 +29,25 @@ static void load_frame(frame_t *f, char *path){
         	exit(EXIT_FAILURE);
         f->rep_counter = atoi(fgets(line,len,fp));
         //printf("%d",f->rep_counter);
-        f->content = '\0';
+        //f->content;
         //fgets(line,len,fp);
+        f->content = (char*)malloc(sizeof(char)*strlen(line));
+        strcpy(f->content,line);
     	while (fgets(line, len, fp) != NULL) {
-    		//char* temp = *line;
-    		printf("%s",line);
+    		strcat(f->content,line);
+    		//printf("%s",line);
+    		
+    		//printf("%s")
+    		//strcat(f->content,line);
         //while ((read = fgets(line, len, fp)) != NULL) {
         	//printf("Retrieved line of length %zu:\n", strlen(read));
-        	//printf("%s", line); //this line is NOT your code
+        	//printf("%s",f->content);
+
         	//f->content = strcat(f->content,line);
 		//your task is not to print the line, instead, you need to save the line to
 		//frame->content
     	}
+    	printf("%s",f->content);
 	fclose(fp);
 
 	//also keep in mind, the first line is the repetition counter.
@@ -55,7 +62,7 @@ frame_t * frame_new(char *pathname, int id) {
 		perror("OOM, alloc failed\n");
 		return 0;
 	}
-	f->content = NULL;
+	//f->content = NULL;
 	f->id = id;
 	f->rep_counter = 0;
 	load_frame(f, pathname);
