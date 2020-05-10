@@ -12,11 +12,13 @@
 * 04/29/2020, By Jun Yuan-Murray, modified for CS232, Pace University, NY
 ******************************************************/
 #include "asciimation.h"
+#include "slist.h"
 #include <dirent.h>
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
 static int get_num_frames(char *path) {
 	DIR * dir;
 	struct dirent * pdir;
@@ -40,10 +42,12 @@ asciimation_t * asciimation_new(char * path, int fps){
 		perror("failed allocation\n");
 		return 0;
 	}
+	//assign fps to frames_per_second in the struct
+	ascm->frames_per_second = fps;
 	//figure out how many frames are in the dir?
 	int n = get_num_frames(path);
 	//create a list of frames
-	ascm->frames = //TODO: create a new slist;
+	ascm->frames = slist_create();//TODO: create a new slist;
 	// we know the number of frames, we can simply reconstruct the name of each ascii file, and construct a frame obj for 
 	// each ascii file. Must implement frame_new first
 	for(int i=0; i<n; i++) {
@@ -56,7 +60,8 @@ asciimation_t * asciimation_new(char * path, int fps){
 			sprintf(asciipath+len, "%d", i+1);
 		//if your path is ./data/a, and i=0, then asciipath = ./data/a/1, exactly what we want to load
 		struct frame_t * aframe = frame_new(asciipath,i);
-		//TODO:add aframe to ascm->frames;
+		//add aframe to ascm->frames;
+		slist_add_front(ascm->frames,aframe);
 	}
 	
 	return ascm;
@@ -73,15 +78,24 @@ void asciimation_delete(asciimation_t * ascm){
 void asciimation_play(asciimation_t * ascm){
 	//TODO:your code here
 	//loop through the list of frames and print out each frame, ? is also to be done by you
-	//for(int i=0; i<?; i++) {
-		//printf(?);
+	for(int i=0; i<?; i++) {
+
+		printf(slist_find_at(i)->str);
 		//sleep for frames_per_second * repetition_counter_of_the_frame
+		sleep(ascm->)
 		//clear the screen
-	//}
+		system("clear");
+	}
 }
 void asciimation_reverse(asciimation_t * ascm){
 	//TODO:Your code here
 	//same logic as above, only difference is loop through the list backward.
+	for(int i=?; i>0; i++) {
+		printf(slist_find_at(i)->str);
+		//sleep for frames_per_second * repetition_counter_of_the_frame
+		//clear the screen
+		system("clear");
+	}
 }
 
 

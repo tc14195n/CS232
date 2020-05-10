@@ -11,6 +11,7 @@ typedef struct frame_t {
 	int rep_counter;
 	int id;
 	char * content;
+	struct frame_t* next;
 } frame_t;
 
 struct frame_t * frame_new(char * pathnam, int id);

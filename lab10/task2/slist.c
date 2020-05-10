@@ -1,0 +1,344 @@
+#include <stdio.h>
+#include "slist.h"
+#include "frame.h"
+#include <string.h>
+#include <stdlib.h>
+/*
+struct slist {
+  struct frame *front; // front node
+  struct frame *back;  // back node
+};*/
+
+/*
+struct list_t {
+  struct frame *front; // front node
+  struct frame *back;  // back node
+};*/
+
+
+
+struct slist *slist_create(){
+	/**
+ 	* Allocates new slist dynamically.
+ 	* 
+ 	* @return pointer to the list
+ 	*/
+	struct slist *new_list = (struct slist*)malloc(sizeof(struct slist));
+	new_list->front = NULL;
+	new_list->back = NULL;
+	new_list->size = 0;
+	return new_list;
+
+};
+
+
+struct frame* slist_add_back(struct slist *l, char *str){
+	/** 
+ 	* Inserts new node in slist after the last node.
+ 	*
+ 	* @param l pointer to the list (non-NULL)
+ 	* @param str pointer to a C string to store in new list node
+ 	* returns a pointer to the newly added node
+ 	*/
+	struct frame *s1, *old_back;
+	s1 = frame_create(str);
+	if(l->back == NULL){
+		l->back = s1;
+		l->front = s1;
+	} else {
+		old_back = l->back;
+		old_back->next = s1;
+		l->back = s1;
+	}
+	l->size++;
+	
+	return s1;
+};
+
+
+struct frame* slist_add_front(struct slist *l, char *str){
+	/** 
+ 	* Inserts new node in slist before the first node.
+ 	*
+ 	* @param l pointer to the list (non-NULL)
+ 	* @param str pointer to a C string to store in new list node
+ 	* returns a pointer to the newly added node
+ 	*/
+	struct frame *s1, *old_front;
+	s1 = frame_create(str);
+	if(l->front == NULL){
+		l->back = s1;
+		l->front = s1;
+	} else {
+		old_front = l->front;
+		s1->next = old_front;
+		l->front = s1;
+	}
+	l->size++;
+	return s1;
+};
+
+
+struct frame* slist_find(struct slist *l, char *str)
+{
+	/**
+ 	* Returns the first frame with the given string.
+ 	*  
+ 	* @param l pointer to the list (non-NULL)
+ 	* @parap str pointer to a string
+ 	* @return struct frame* or NULL if no match
+ 	*/
+	struct frame *temp;
+	temp = l->front;
+	while(temp != NULL){
+		if(strcmp(temp->str,str) == 0){
+			return temp;
+		} else {
+			temp = temp->next;
+		}
+	}
+	return NULL;
+};
+
+struct frame *slist_find_at(struct slist *list, int index)
+{
+
+	struct frame *temp;
+	temp = list->front;
+	int num = 0;
+	int length = list->size;
+	if(index < 0){
+		if(index*(-1) > length){
+			return NULL;
+		}
+		num = length + index;
+	} else {
+		if(index > length){
+			return NULL;
+		}
+		num = index;
+	}
+	//int num1 = 0;
+	for(int i = 0; i < num; i++){
+		temp = temp->next;
+		/*
+		if(num == index)
+		{
+			return temp;
+		}
+		else if(num < index)
+		{
+			temp = temp->next;
+			num++;
+		}
+		else if(num > index)
+		{
+			num1 = (length) + index;
+			while(num != num1)
+			{
+				temp = temp->next;
+				num++;
+			}
+			//return temp;
+		}
+		*/
+	
+	}
+	
+	return temp;
+};
+
+
+
+void slist_destroy(struct slist *l)
+{
+	/**
+ 	* Deallocate a list and all frames
+ 	*
+ 	* @param l pointer tot he list
+ 	*/
+	struct frame * tbd, *next; //tbd -- frame TO BE DESTROYED
+	tbd = l->front;
+	next = NULL;
+	if(tbd != NULL){
+		next = tbd->next;
+	}
+	
+
+	while(next != NULL){
+		frame_destroy(tbd);
+		tbd = next;
+		next = tbd->next;
+	}
+	if(tbd != NULL){
+		frame_destroy(tbd);
+	}
+	
+	free(l);
+
+};
+
+/**
+ * Traverse the list and print the content of each node.
+ *
+ * @param l pointer to the list (non-NULL)
+ */
+void slist_traverse(struct slist *l)
+{
+	/**
+ 	* Traverse the list and print the content of each node.
+ 	*
+ 	* @param l pointer to the list (non-NULL)
+ 	*/
+	struct frame *temp;
+	temp = l->front;
+	
+	while(temp != NULL){
+		printf("%s\n",temp->str);
+		temp = temp->next;
+	}
+};
+
+
+uint32_t slist_length(struct slist *l)
+{
+	/**
+ 	* Returns the number of elements in the list (nodes).
+ 	*
+ 	* @param l pointer to the list (non-NULL)
+ 	*/
+ 	/*
+	struct frame *temp;
+	temp=l->front;
+	
+	unsigned int count = 0;
+	while(temp != NULL){
+		count++;
+		temp = temp->next;
+	}
+	return count;
+	*/
+	return l->size;
+
+	
+};
+
+//struct frame* slist_delete(struct slist *l, char *str){
+struct frame* slist_delete(struct slist *l, char *str)
+{
+
+	/**
+ 	* Deletes the first frame with the given string.
+ 	*  
+ 	* @param l pointer to the list (non-NULL)
+ 	* @parap str pointer to a string
+ 	* @return struct frame* or NULL if no match
+ 	*/
+ 	//relink prior node to new after node
+ 	//if deleting first node, redefine "l->front"
+ 	//if deleting last ndoe, redefine "l->back"
+	struct frame *tbd = l->front, *last = NULL;
+	while(tbd != NULL){
+		if(strcmp(tbd->str,str) == 0){
+			//delete
+			l->size--;
+			if(last == NULL){
+				if(l->size == 0){
+					l->back = NULL;
+				}
+				l->front = tbd->next;
+				frame_destroy(tbd);
+				return NULL;
+			} else if(tbd->next == NULL){
+				l->back = last;
+				//frame_destroy(tbd);
+				return NULL;
+			} else {
+				last->next = tbd->next;
+				frame_destroy(tbd);
+				return NULL;
+			}
+		}
+		last = tbd;
+		tbd = tbd->next;
+	}
+	return NULL;
+
+};
+
+void slist_delete_at(struct slist *list, int index)
+{
+	//struct frame * temp;
+	//temp = slist_find_at(list, index);
+	//frame_destroy(temp);
+	//free(list);
+
+	struct frame *temp, *last;
+	last = NULL;
+	//frame *last;
+	temp = list->front;
+	int num = 0;
+	int length = list->size;
+	if(index < 0)
+	{
+        	if(index*(-1) > length)
+		{
+		return;
+		}
+        num = length + index;
+	} else 
+	{
+        if(index > length)
+        {
+            return;
+        }
+        num = index;
+	}
+    //int num1 = 0;
+	for(int i = 0; i < num; i++)
+	{
+		last = temp;
+        temp = temp->next;
+	}
+
+    list->size--;
+    if(temp->next == NULL)
+	{
+            //l->back = last;
+		if(num != 0){
+			last->next = NULL;
+		} else {
+			list->front = NULL;
+			list->back = NULL;
+		}
+
+        frame_destroy(temp);
+        return;
+    }
+	else
+	{
+		if(num != 0){
+			last->next = temp->next;
+		} else {
+			list->front = temp->next;
+		}
+        frame_destroy(temp);
+        return;
+    }
+}
+
+struct frame * slist_get_front(struct slist *a)
+{
+	struct frame *temp;
+	temp = a->front;
+	return temp;
+};
+
+
+struct frame * slist_get_back(struct slist *a)
+{
+	struct frame *temp;
+	temp = a->back;
+	return temp;
+
+};

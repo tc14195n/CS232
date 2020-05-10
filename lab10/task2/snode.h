@@ -1,13 +1,13 @@
 #ifndef _snode_H
 #define _snode_H
-#include "frame.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
 struct snode {
   //TODO: change str to dynamic allcoation
-  struct frame *data;
+  char *str;
   struct snode * next;
 };
 
