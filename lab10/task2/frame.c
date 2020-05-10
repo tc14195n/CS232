@@ -22,15 +22,15 @@ static void load_frame(frame_t *f, char *path){
 	// here is an example of reading line-by-line from path
 		FILE * fp;
     	char * line = NULL; 
-    	int read;
+    	char* read = NULL;
     	int len = 100;
 		fp = fopen(path, "r");
     	if (fp == NULL)
         	exit(EXIT_FAILURE);
 
     	//while ((read = getline(&line, &len, fp)) != -1) {
-        while ((read = fgets(&line, len, fp)) != -1) {
-        	printf("Retrieved line of length %zu:\n", read);
+        while ((read = fgets(line, len, fp)) != NULL) {
+        	printf("Retrieved line of length %zu:\n", strlen(read));
         	printf("%s", line); //this line is NOT your code
         	strcat(f->content,line);
 		//your task is not to print the line, instead, you need to save the line to
