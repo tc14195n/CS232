@@ -57,8 +57,8 @@ frame_t * frame_new(char *pathname, int id) {
 
 void frame_delete(frame_t * f) {
 	//TODO: before we free f what inside f must be free-ed first?
-	free(f->rep_counter);
-	free(f->id);
+	//free(f->rep_counter);
+	//free(f->id);
 	free(f->content);
 	free(f);
 }
