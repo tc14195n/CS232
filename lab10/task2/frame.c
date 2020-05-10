@@ -38,21 +38,9 @@ static void load_frame(frame_t *f, char *path){
     	while (fgets(line, len, fp) != NULL) {
     		char* temp = f->content;
     		f->content = (char*)malloc(sizeof(char)*(strlen(temp) + strlen(line)) +1);
-    		//free(temp);
-    		//char* temp = (char*)malloc(sizeof(f->content) + sizeof(char)*strlen(line));
-    		//strcpy(temp,f->content);
-    		//strcat(temp,line);
-    		//free(f->content);
-    		//f->content = temp;
-    		
-    		
-    		//int size = (strlen(f->content) + strlen(line))*sizeof(char) + 1;
-    		//realloc(f->content, size);
     		strcpy(f->content,temp);
     		strcat(f->content,line);
-    		free(temp);
-    		
-    		
+    		free(temp);	
     	}
     	
     	//printf("%s",f->content);
