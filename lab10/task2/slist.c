@@ -1,18 +1,19 @@
 #include <stdio.h>
 #include "slist.h"
+#include "snode.h"
 #include "frame.h"
 #include <string.h>
 #include <stdlib.h>
 /*
 struct slist {
-  struct frame *front; // front node
-  struct frame *back;  // back node
+  struct snode *front; // front node
+  struct snode *back;  // back node
 };*/
 
 /*
 struct list_t {
-  struct frame *front; // front node
-  struct frame *back;  // back node
+  struct snode *front; // front node
+  struct snode *back;  // back node
 };*/
 
 
@@ -32,7 +33,7 @@ struct slist *slist_create(){
 };
 
 
-struct frame* slist_add_back(struct slist *l, char *str){
+struct snode* slist_add_back(struct slist *l, frame_t *f){
 	/** 
  	* Inserts new node in slist after the last node.
  	*
@@ -40,8 +41,8 @@ struct frame* slist_add_back(struct slist *l, char *str){
  	* @param str pointer to a C string to store in new list node
  	* returns a pointer to the newly added node
  	*/
-	struct frame *s1, *old_back;
-	s1 = frame_create(str);
+	struct snode *s1, *old_back;
+	s1 = snode_create(f);
 	if(l->back == NULL){
 		l->back = s1;
 		l->front = s1;
@@ -56,7 +57,7 @@ struct frame* slist_add_back(struct slist *l, char *str){
 };
 
 
-struct frame* slist_add_front(struct slist *l, char *str){
+struct snode* slist_add_front(struct slist *l, frame_t *f){
 	/** 
  	* Inserts new node in slist before the first node.
  	*
@@ -64,8 +65,8 @@ struct frame* slist_add_front(struct slist *l, char *str){
  	* @param str pointer to a C string to store in new list node
  	* returns a pointer to the newly added node
  	*/
-	struct frame *s1, *old_front;
-	s1 = frame_create(str);
+	struct snode *s1, *old_front;
+	s1 = snode_create(f);
 	if(l->front == NULL){
 		l->back = s1;
 		l->front = s1;
@@ -79,19 +80,19 @@ struct frame* slist_add_front(struct slist *l, char *str){
 };
 
 
-struct frame* slist_find(struct slist *l, char *str)
+struct snode* slist_find(struct slist *l, char *str)//ctf is Content To Find
 {
 	/**
- 	* Returns the first frame with the given string.
+ 	* Returns the first snode with the given string.
  	*  
  	* @param l pointer to the list (non-NULL)
- 	* @parap str pointer to a string
- 	* @return struct frame* or NULL if no match
+ 	* @parap ctf pointer to a string
+ 	* @return struct snode* or NULL if no match
  	*/
-	struct frame *temp;
+	struct snode *temp;
 	temp = l->front;
 	while(temp != NULL){
-		if(strcmp(temp->str,str) == 0){
+		if(strcmp(temp->data->content,str) == 0){
 			return temp;
 		} else {
 			temp = temp->next;
@@ -100,10 +101,10 @@ struct frame* slist_find(struct slist *l, char *str)
 	return NULL;
 };
 
-struct frame *slist_find_at(struct slist *list, int index)
+struct snode *slist_find_at(struct slist *list, int index)
 {
 
-	struct frame *temp;
+	struct snode *temp;
 	temp = list->front;
 	int num = 0;
 	int length = list->size;
@@ -153,11 +154,11 @@ struct frame *slist_find_at(struct slist *list, int index)
 void slist_destroy(struct slist *l)
 {
 	/**
- 	* Deallocate a list and all frames
+ 	* Deallocate a list and all snodes
  	*
  	* @param l pointer tot he list
  	*/
-	struct frame * tbd, *next; //tbd -- frame TO BE DESTROYED
+	struct snode * tbd, *next; //tbd -- snode TO BE DESTROYED
 	tbd = l->front;
 	next = NULL;
 	if(tbd != NULL){
@@ -166,12 +167,12 @@ void slist_destroy(struct slist *l)
 	
 
 	while(next != NULL){
-		frame_destroy(tbd);
+		snode_destroy(tbd);
 		tbd = next;
 		next = tbd->next;
 	}
 	if(tbd != NULL){
-		frame_destroy(tbd);
+		snode_destroy(tbd);
 	}
 	
 	free(l);
@@ -190,11 +191,11 @@ void slist_traverse(struct slist *l)
  	*
  	* @param l pointer to the list (non-NULL)
  	*/
-	struct frame *temp;
+	struct snode *temp;
 	temp = l->front;
 	
 	while(temp != NULL){
-		printf("%s\n",temp->str);
+		printf("%s\n",temp->data->content);
 		temp = temp->next;
 	}
 };
@@ -208,7 +209,7 @@ uint32_t slist_length(struct slist *l)
  	* @param l pointer to the list (non-NULL)
  	*/
  	/*
-	struct frame *temp;
+	struct snode *temp;
 	temp=l->front;
 	
 	unsigned int count = 0;
@@ -223,23 +224,23 @@ uint32_t slist_length(struct slist *l)
 	
 };
 
-//struct frame* slist_delete(struct slist *l, char *str){
-struct frame* slist_delete(struct slist *l, char *str)
+//struct snode* slist_delete(struct slist *l, char *str){
+struct snode* slist_delete(struct slist *l, char *str)
 {
 
 	/**
- 	* Deletes the first frame with the given string.
+ 	* Deletes the first snode with the given string.
  	*  
  	* @param l pointer to the list (non-NULL)
  	* @parap str pointer to a string
- 	* @return struct frame* or NULL if no match
+ 	* @return struct snode* or NULL if no match
  	*/
  	//relink prior node to new after node
  	//if deleting first node, redefine "l->front"
  	//if deleting last ndoe, redefine "l->back"
-	struct frame *tbd = l->front, *last = NULL;
+	struct snode *tbd = l->front, *last = NULL;
 	while(tbd != NULL){
-		if(strcmp(tbd->str,str) == 0){
+		if(strcmp(tbd->data->content,str) == 0){
 			//delete
 			l->size--;
 			if(last == NULL){
@@ -247,15 +248,15 @@ struct frame* slist_delete(struct slist *l, char *str)
 					l->back = NULL;
 				}
 				l->front = tbd->next;
-				frame_destroy(tbd);
+				snode_destroy(tbd);
 				return NULL;
 			} else if(tbd->next == NULL){
 				l->back = last;
-				//frame_destroy(tbd);
+				//snode_destroy(tbd);
 				return NULL;
 			} else {
 				last->next = tbd->next;
-				frame_destroy(tbd);
+				snode_destroy(tbd);
 				return NULL;
 			}
 		}
@@ -268,14 +269,14 @@ struct frame* slist_delete(struct slist *l, char *str)
 
 void slist_delete_at(struct slist *list, int index)
 {
-	//struct frame * temp;
+	//struct snode * temp;
 	//temp = slist_find_at(list, index);
-	//frame_destroy(temp);
+	//snode_destroy(temp);
 	//free(list);
 
-	struct frame *temp, *last;
+	struct snode *temp, *last;
 	last = NULL;
-	//frame *last;
+	//snode *last;
 	temp = list->front;
 	int num = 0;
 	int length = list->size;
@@ -312,7 +313,7 @@ void slist_delete_at(struct slist *list, int index)
 			list->back = NULL;
 		}
 
-        frame_destroy(temp);
+        snode_destroy(temp);
         return;
     }
 	else
@@ -322,22 +323,22 @@ void slist_delete_at(struct slist *list, int index)
 		} else {
 			list->front = temp->next;
 		}
-        frame_destroy(temp);
+        snode_destroy(temp);
         return;
     }
 }
 
-struct frame * slist_get_front(struct slist *a)
+struct snode * slist_get_front(struct slist *a)
 {
-	struct frame *temp;
+	struct snode *temp;
 	temp = a->front;
 	return temp;
 };
 
 
-struct frame * slist_get_back(struct slist *a)
+struct snode * slist_get_back(struct slist *a)
 {
-	struct frame *temp;
+	struct snode *temp;
 	temp = a->back;
 	return temp;
 

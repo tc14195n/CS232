@@ -36,6 +36,7 @@
 
 #include <stdint.h>
 #include "snode.h"
+#include "frame.h"
 
 struct slist {
   struct snode *front; // front node
@@ -69,7 +70,7 @@ struct snode *slist_find_at(struct slist *list, int index);
  * @param str pointer to a C string to store in new list node
  * returns a pointer to the newly added node
  */
-struct snode* slist_add_back(struct slist *l, char *str);
+struct snode* slist_add_back(struct slist *l, frame *f);
 
 /** 
  * Inserts new node in slist before the first node.
@@ -78,7 +79,7 @@ struct snode* slist_add_back(struct slist *l, char *str);
  * @param str pointer to a C string to store in new list node
  * returns a pointer to the newly added node
  */
-struct snode* slist_add_front(struct slist *l, char *str);
+struct snode* slist_add_front(struct slist *l, frame *f);
 
 /**
  * Returns the first snode with the given string.

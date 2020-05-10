@@ -7,13 +7,13 @@
 
 struct snode {
   //TODO: change str to dynamic allcoation
-  struct frame *data;
+  struct frame_t* data;
   struct snode * next;
 };
 
 //TODO: change prototypes of functions to remove
 //length
-struct snode *snode_create(char *s) ; 
+struct snode *snode_create(frame *f) ; 
 char* snode_get_str(struct snode *s);
 struct snode *snode_get_next(struct snode *s);
 void snode_destroy(struct snode * s) ;

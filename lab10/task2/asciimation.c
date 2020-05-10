@@ -72,17 +72,20 @@ void asciimation_delete(asciimation_t * ascm){
 	//reversed steps of asciimation_new
 	// 1. free all the frames, must implement frame_delete first.(why?)
 	// 2. free the list
+	slist_destroy(ascm->frames);
 	// 3. free the ascm itself
+	free(ascm->frames_per_second);
+	free(ascm);
 }
 
 void asciimation_play(asciimation_t * ascm){
 	//TODO:your code here
 	//loop through the list of frames and print out each frame, ? is also to be done by you
-	for(int i=0; i<?; i++) {
+	for(int i=0; i<(ascm->frames->size); i++) {
 
-		printf(slist_find_at(i)->str);
+		printf((slist_find_at((ascm->frames),i))->data->content);
 		//sleep for frames_per_second * repetition_counter_of_the_frame
-		sleep(ascm->)
+		sleep((ascm->frames_per_second) * 1);
 		//clear the screen
 		system("clear");
 	}
@@ -90,8 +93,8 @@ void asciimation_play(asciimation_t * ascm){
 void asciimation_reverse(asciimation_t * ascm){
 	//TODO:Your code here
 	//same logic as above, only difference is loop through the list backward.
-	for(int i=?; i>0; i++) {
-		printf(slist_find_at(i)->str);
+	for(int i=(ascm->frames->size); i>0; i--) {
+		printf((slist_find_at((ascm->frames),i))->data->content);
 		//sleep for frames_per_second * repetition_counter_of_the_frame
 		//clear the screen
 		system("clear");
