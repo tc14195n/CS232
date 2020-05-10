@@ -21,23 +21,24 @@ static void load_frame(frame_t *f, char *path){
 	// in line by line and store it in the frame->content
 	// here is an example of reading line-by-line from path
 		FILE * fp;
-		f->content = "";
-    	char * line = NULL; 
-    	char* read = NULL;
-    	int len = 100;
+    	char line[4096]; 
+    	//char* read = NULL;
+    	int len = 300;
 		fp = fopen(path, "r");
     	if (fp == NULL)
         	exit(EXIT_FAILURE);
-
+        f->rep_counter = atoi(fgets(line,len,fp));
+        printf("%d",f->rep_counter);
+        f->content = '\0';
+        fgets(line,len,fp);
     	//while ((read = getline(&line, &len, fp)) != -1) {
-        while ((read = fgets(line, len, fp)) != NULL) {
-        	printf("Retrieved line of length %zu:\n", strlen(read));
-        	printf("%s", line); //this line is NOT your code
-        	f->content = strcat(f->content,line);
-        	f->rep_counter++;
+        //while ((read = fgets(line, len, fp)) != NULL) {
+        	//printf("Retrieved line of length %zu:\n", strlen(read));
+        	//printf("%s", line); //this line is NOT your code
+        	//f->content = strcat(f->content,line);
 		//your task is not to print the line, instead, you need to save the line to
 		//frame->content
-    	}
+    	//}
 	fclose(fp);
 
 	//also keep in mind, the first line is the repetition counter.
@@ -52,6 +53,7 @@ frame_t * frame_new(char *pathname, int id) {
 		perror("OOM, alloc failed\n");
 		return 0;
 	}
+	f->content = NULL;
 	f->id = id;
 	f->rep_counter = 0;
 	load_frame(f, pathname);

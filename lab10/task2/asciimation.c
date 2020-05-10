@@ -32,6 +32,7 @@ static int get_num_frames(char *path) {
 		}
 
 	}
+	closedir(dir);
 	return n;
 
 }
@@ -42,9 +43,11 @@ asciimation_t * asciimation_new(char * path, int fps){
 		perror("failed allocation\n");
 		return 0;
 	}
+	//printf("entered asciimation new");
 	//assign fps to frames_per_second in the struct
 	ascm->frames_per_second = fps;
 	//figure out how many frames are in the dir?
+	//printf("here!!");
 	int n = get_num_frames(path);
 	//create a list of frames
 	ascm->frames = slist_create();//TODO: create a new slist;
@@ -59,9 +62,11 @@ asciimation_t * asciimation_new(char * path, int fps){
 		else	
 			sprintf(asciipath+len, "%d", i+1);
 		//if your path is ./data/a, and i=0, then asciipath = ./data/a/1, exactly what we want to load
+		//printf("here");
 		struct frame_t * aframe = frame_new(asciipath,i);
 		//add aframe to ascm->frames;
 		slist_add_front(ascm->frames,aframe);
+		//printf("%d",aframe->id);
 	}
 	
 	return ascm;
