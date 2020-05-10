@@ -28,17 +28,19 @@ static void load_frame(frame_t *f, char *path){
     	if (fp == NULL)
         	exit(EXIT_FAILURE);
         f->rep_counter = atoi(fgets(line,len,fp));
-        printf("%d",f->rep_counter);
+        //printf("%d",f->rep_counter);
         f->content = '\0';
-        fgets(line,len,fp);
-    	//while ((read = getline(&line, &len, fp)) != -1) {
+        //fgets(line,len,fp);
+    	while (fgets(line, len, fp) != NULL) {
+    		//char* temp = *line;
+    		printf("%s",line);
         //while ((read = fgets(line, len, fp)) != NULL) {
         	//printf("Retrieved line of length %zu:\n", strlen(read));
         	//printf("%s", line); //this line is NOT your code
         	//f->content = strcat(f->content,line);
 		//your task is not to print the line, instead, you need to save the line to
 		//frame->content
-    	//}
+    	}
 	fclose(fp);
 
 	//also keep in mind, the first line is the repetition counter.
