@@ -21,6 +21,7 @@ static void load_frame(frame_t *f, char *path){
 	// in line by line and store it in the frame->content
 	// here is an example of reading line-by-line from path
 		FILE * fp;
+		f->content = "";
     	char * line = NULL; 
     	char* read = NULL;
     	int len = 100;
@@ -32,7 +33,8 @@ static void load_frame(frame_t *f, char *path){
         while ((read = fgets(line, len, fp)) != NULL) {
         	printf("Retrieved line of length %zu:\n", strlen(read));
         	printf("%s", line); //this line is NOT your code
-        	strcat(f->content,line);
+        	f->content = strcat(f->content,line);
+        	f->rep_counter++;
 		//your task is not to print the line, instead, you need to save the line to
 		//frame->content
     	}
@@ -51,6 +53,7 @@ frame_t * frame_new(char *pathname, int id) {
 		return 0;
 	}
 	f->id = id;
+	f->rep_counter = 0;
 	load_frame(f, pathname);
 	return f;
 }

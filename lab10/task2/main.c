@@ -32,12 +32,12 @@ int main() {
 	int fps;
 
 	printf("Please input your ascii data file path\n");
-	scanf("%s", path);
+	if((scanf("%s", path) == 1)){};
 
 	printf("How many frames per second?\n");
-	scanf("%d", &fps);
+	if((scanf("%d", &fps) == 1)){};
 
-	system("@cls||clear");
+	if(system("@cls||clear") == 1);
 	asciimation_t * ascm = asciimation_new(path, fps);
 	do {
 		printf ( "+-------------------------------------------+\n");
@@ -69,7 +69,7 @@ int main() {
 			return 1;//impossible
 		}
 		printf("[press any key to continue]\n");
-		system("@cls||clear");
+		if(system("@cls||clear") == 1){};
 	} while (1);
 	
 }
