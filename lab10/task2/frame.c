@@ -31,23 +31,31 @@ static void load_frame(frame_t *f, char *path){
         //printf("%d",f->rep_counter);
         //f->content;
         //fgets(line,len,fp);
-        f->content = (char*)malloc(sizeof(char)*strlen(line));
+        f->content = (char*)malloc(sizeof(char)*strlen(line)+1);
+        //f->content = line;
         strcpy(f->content,line);
+        
     	while (fgets(line, len, fp) != NULL) {
-    		strcat(f->content,line);
-    		//printf("%s",line);
+    		char* temp = f->content;
+    		f->content = (char*)malloc(sizeof(char)*(strlen(temp) + strlen(line)) +1);
+    		//free(temp);
+    		//char* temp = (char*)malloc(sizeof(f->content) + sizeof(char)*strlen(line));
+    		//strcpy(temp,f->content);
+    		//strcat(temp,line);
+    		//free(f->content);
+    		//f->content = temp;
     		
-    		//printf("%s")
-    		//strcat(f->content,line);
-        //while ((read = fgets(line, len, fp)) != NULL) {
-        	//printf("Retrieved line of length %zu:\n", strlen(read));
-        	//printf("%s",f->content);
-
-        	//f->content = strcat(f->content,line);
-		//your task is not to print the line, instead, you need to save the line to
-		//frame->content
+    		
+    		//int size = (strlen(f->content) + strlen(line))*sizeof(char) + 1;
+    		//realloc(f->content, size);
+    		strcpy(f->content,temp);
+    		strcat(f->content,line);
+    		free(temp);
+    		
+    		
     	}
-    	printf("%s",f->content);
+    	
+    	//printf("%s",f->content);
 	fclose(fp);
 
 	//also keep in mind, the first line is the repetition counter.

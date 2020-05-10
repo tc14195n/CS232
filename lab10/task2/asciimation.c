@@ -18,6 +18,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 
 static int get_num_frames(char *path) {
 	DIR * dir;
@@ -65,7 +66,7 @@ asciimation_t * asciimation_new(char * path, int fps){
 		//printf("here");
 		struct frame_t * aframe = frame_new(asciipath,i);
 		//add aframe to ascm->frames;
-		slist_add_front(ascm->frames,aframe);
+		slist_add_back(ascm->frames,aframe);
 		//printf("%d",aframe->id);
 	}
 	
@@ -84,13 +85,15 @@ void asciimation_delete(asciimation_t * ascm){
 }
 
 void asciimation_play(asciimation_t * ascm){
+	if(system("clear") == 1){};
 	//TODO:your code here
 	//loop through the list of frames and print out each frame, ? is also to be done by you
 	for(int i=0; i<(ascm->frames->size); i++) {
+		frame_t* f = slist_find_at(ascm->frames,i)->data;
 
-		printf("%s",(slist_find_at((ascm->frames),i))->data->content);
+		printf("%s",(f->content));
 		//sleep for frames_per_second * repetition_counter_of_the_frame
-		//sleep((ascm->frames_per_second) * (slist_find_at((ascm->frames),i))->data->rep_counter);
+		sleep((ascm->frames_per_second) * (f->rep_counter));
 		//clear the screen
 		if(system("clear") == 1){};
 	}
@@ -98,9 +101,12 @@ void asciimation_play(asciimation_t * ascm){
 void asciimation_reverse(asciimation_t * ascm){
 	//TODO:Your code here
 	//same logic as above, only difference is loop through the list backward.
-	for(int i=(ascm->frames->size); i>0; i--) {
-		printf("%s",(slist_find_at((ascm->frames),i))->data->content);
+	for(int i=(ascm->frames->size)-1; i>=0; i--) {
+		frame_t* f = slist_find_at(ascm->frames,i)->data;
+
+		printf("%s",(f->content));
 		//sleep for frames_per_second * repetition_counter_of_the_frame
+		sleep((ascm->frames_per_second) * (f->rep_counter));
 		//clear the screen
 		if(system("clear") == 1){};
 	}

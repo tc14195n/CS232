@@ -33,16 +33,16 @@ int main() {
 
 	printf("Please input your ascii data file path\n");
 	//if((scanf("%s", path) == 1)){};
-	scanf("%s", path);
+	if(scanf("%s", path) == 1){};
 	//printf("%s",path);
 	//if(system("clear") == 1);
 	printf("How many frames per second?\n");
-	scanf("%d", &fps);
+	if(scanf("%d", &fps) == 1){};
 	//fps = 5;
 	//printf("%s",path);
 	//printf("%x",fps);
 	//printf("before clear");
-	//if(system("clear") == 1);
+	if(system("clear") == 1);
 	//printf("after clear");
 	asciimation_t * ascm = asciimation_new(path, fps);
 	//asciimation_t * ascm = NULL;
@@ -59,6 +59,7 @@ int main() {
 
 		printf("\n Please enter your option:");
 		get_valid_option(&option);
+		if(system("clear") == 1){};
 
 		switch (option) {
 		case 1: {
