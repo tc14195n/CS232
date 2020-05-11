@@ -38,6 +38,10 @@ int main() {
 	//if(system("clear") == 1);
 	printf("How many frames per second?\n");
 	if(scanf("%d", &fps) == 1){};
+	if(fps<1)
+	{
+	return(0);
+	}
 	//fps = 5;
 	//printf("%s",path);
 	//printf("%x",fps);
